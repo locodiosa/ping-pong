@@ -10,12 +10,22 @@ var wall2 = {
 	width: 10
 };
 
+var wall3 = {
+	length: 600,
+	width: 1
+};
+
+var wall4 = {
+	length: 600,
+	width: 1
+};
+
 var ball = {
 	x: 300,
 	y: 300,
-	radius: 5,
-	speedX: 3,
-	speedY: 3
+	radius: 10,
+	speedX: 5,
+	speedY: 2
 };
 
 var canvas = null;
@@ -29,7 +39,7 @@ function initCanvas() {
 	if (canvas == null) {
 		canvas = document.getElementById("canvas");
 		canvas.width  = wall1.length; 
-		canvas.height = 600;
+		canvas.height = wall3.length;
 	}
 }
 
@@ -59,6 +69,18 @@ function calc() {
 		
 	ball.x = ball.newX;
 	ball.y = ball.newY;
+	if(ball.y <= wall3.length - wall1.width - ball.radius) {
+		ball.speedY = -ball.speedY;
+	}
+	if(ball.y >= wall1.width + ball.radius) {
+		ball.speedY = -ball.speedY;
+	}
+	if(ball.x <= wall1.length - wall3.width - ball.radius) {
+		ball.speedX = -ball.speedX;
+	}
+	if(ball.x >= wall3.width + ball.radius) {
+		ball.speedX = -ball.speedX;
+	}
 }
 
 var animFrame = window.requestAnimationFrame ||
