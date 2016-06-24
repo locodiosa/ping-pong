@@ -23,9 +23,23 @@ var wall4 = {
 var ball = {
 	x: 300,
 	y: 300,
-	radius: 10,
+	radius: 30,
 	speedX: 5,
 	speedY: 2
+};
+
+var racket1 = {
+	length: 200,
+	width: 50,
+	x: 0,
+	y: wall3.length/2
+};
+
+var racket2 = {
+	length: 200,
+	width: 50,
+	x: wall1.length,
+	y: wall3.length/2
 };
 
 var canvas = null;
@@ -57,6 +71,8 @@ function drawObjects(context) {
 	context.beginPath();
 	context.fillRect(0, 0, wall1.length, wall1.width);
 	context.fillRect(0, canvas.height - 10, wall2.length, wall2.width);
+	context.fillRect(racket1.x, racket1.y - racket1.length / 2, racket1.width, racket1.length);
+	context.fillRect(racket2.x - racket2.width, racket2.y - racket2.length / 2, racket1.width, racket1.length);
 	context.arc(ball.x, ball.y, ball.radius, 0, 2*Math.PI);
 	context.closePath();
 	context.fill();	
@@ -79,6 +95,16 @@ function calc() {
 		ball.speedX = -ball.speedX;
 	}
 	if(ball.x >= wall3.width + ball.radius) {
+		ball.speedX = -ball.speedX;
+	}
+	if((ball.x <= racket1.x + racket1.width + ball.radius) && 
+		(ball.y >= racket1.y - racket1.length/2 - ball.radius) && 
+		(ball.y <= racket1.y + racket1.length/2 + ball.radius)) {
+		ball.speedX = -ball.speedX;
+	}
+	if((ball.x >= racket2.x - racket2.width - ball.radius) && 
+		(ball.y >= racket2.y - racket2.length/2 - ball.radius) && 
+		(ball.y <= racket2.y + racket2.length/2 + ball.radius)) {
 		ball.speedX = -ball.speedX;
 	}
 }
