@@ -32,14 +32,16 @@ var racket1 = {
 	length: 100,
 	width: 15,
 	x: 0,
-	y: wall3.length/2
+	y: wall3.length/2,
+	speed: 0
 };
 
 var racket2 = {
 	length: 100,
 	width: 15,
 	x: wall1.length,
-	y: wall3.length/2
+	y: wall3.length/2,
+	speed: 1.8
 };
 
 var canvas = null;
@@ -72,7 +74,7 @@ function drawObjects(context) {
 	context.fillRect(0, 0, wall1.length, wall1.width);
 	context.fillRect(0, canvas.height - 10, wall2.length, wall2.width);
 	context.fillRect(racket1.x, racket1.y - racket1.length / 2, racket1.width, racket1.length);
-	context.fillRect(racket2.x - racket2.width, racket2.y - racket2.length / 2, racket1.width, racket1.length);
+	context.fillRect(racket2.x - racket2.width, racket2.y - racket2.length / 2, racket2.width, racket2.length);
 	context.arc(ball.x, ball.y, ball.radius, 0, 2*Math.PI);
 	context.closePath();
 	context.fill();	
@@ -85,46 +87,73 @@ function calc() {
 		
 	ball.x = ball.newX;
 	ball.y = ball.newY;
-	if(ball.y <= wall3.length - wall1.width - ball.radius) {
+
+	if (ball.y <= wall3.length - wall1.width - ball.radius) {
 		ball.speedY = -ball.speedY;
 	}
-	if(ball.y >= wall1.width + ball.radius) {
+	if (ball.y >= wall1.width + ball.radius) {
 		ball.speedY = -ball.speedY;
 	}
-	if(ball.x <= wall1.length - wall3.width - ball.radius) {
+
+	if (ball.x <= wall1.length - wall3.width - ball.radius) {
 		ball.speedX = -ball.speedX;
 	}
-	if(ball.x >= wall3.width + ball.radius) {
+	if (ball.x >= wall3.width + ball.radius) {
 		ball.speedX = -ball.speedX;
 	}
-	if((ball.x <= racket1.x + racket1.width + ball.radius) && 
+
+	if ((ball.x <= racket1.x + racket1.width + ball.radius) && 
 		(ball.y >= racket1.y - racket1.length/2 - ball.radius) && 
 		(ball.y <= racket1.y + racket1.length/2 + ball.radius)) {
 		ball.speedX = -ball.speedX;
 	}
-	if((ball.x >= racket2.x - racket2.width - ball.radius) && 
+
+	if ((ball.x >= racket2.x - racket2.width - ball.radius) && 
 		(ball.y >= racket2.y - racket2.length/2 - ball.radius) && 
 		(ball.y <= racket2.y + racket2.length/2 + ball.radius)) {
-		ball.speedX = -ball.speedX;
+				
+		var side = (ball.y - racket2.y) / (racket2.length / 2);
+
+		var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
+		var alpha = Math.asin(ball.speedY / ballSpeed);
+
+		alpha += side * Math.PI / 6;
+
+		var maxAlpha = Math.PI * 0.4; 
+		alpha = Math.min(Math.max(alpha, -maxAlpha), maxAlpha);
+
+		ball.speedY = Math.sin(alpha) * ballSpeed;
+		ball.speedX = -Math.sqrt(ballSpeed * ballSpeed - ball.speedY * ball.speedY);
+
+		console.log(ball.speedX + ":" + ball.speedY);
 	}
 
-	if((ball.y <= racket2.length/2) || 
+	if ((ball.y <= racket2.length/2) || 
 		(ball.y >= wall3.length - racket2.length/2)) {
 		racket2.y = racket2.y
 	} else if(ball.y > racket2.y){
-		racket2.y += 1.6;
-	} else if(ball.y < racket2.y){
-		racket2.y -= 1.6;
+		racket2.y += racket2.speed * dt;
+	} else if  (ball.y < racket2.y){
+		racket2.y -= racket2.speed * dt;
 	}	
+
+	racket1.newY = racket1.y + racket1.speed * dt;
+	racket1.y = racket1.newY;
+
+
+
 }
 
-function moove(event) {
+function move(event) {
 	if(event.keyCode == 40) {
-		racket1.y += 4;
+		racket1.speed = 3;
 	} else if(event.keyCode == 38) {
-		racket1.y -= 4;
+		racket1.speed = -3;
 	}
-	
+}
+
+function moveStop() {
+	racket1.speed = 0;
 }
 
 var animFrame = window.requestAnimationFrame ||
