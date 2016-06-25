@@ -30,14 +30,14 @@ var ball = {
 
 var racket1 = {
 	length: 100,
-	width: 20,
+	width: 15,
 	x: 0,
 	y: wall3.length/2
 };
 
 var racket2 = {
 	length: 100,
-	width: 20,
+	width: 15,
 	x: wall1.length,
 	y: wall3.length/2
 };
@@ -116,6 +116,15 @@ function calc() {
 	} else if(ball.y < racket2.y){
 		racket2.y -= 1.6;
 	}	
+}
+
+function moove(event) {
+	if(event.keyCode == 40) {
+		racket1.y += 4;
+	} else if(event.keyCode == 38) {
+		racket1.y -= 4;
+	}
+	
 }
 
 var animFrame = window.requestAnimationFrame ||
