@@ -41,7 +41,7 @@ var racket2 = {
 	width: 15,
 	x: wall1.length,
 	y: wall3.length/2,
-	speed: 1.8
+	speed: 3
 };
 
 var canvas = null;
@@ -105,43 +105,48 @@ function calc() {
 	if ((ball.x <= racket1.x + racket1.width + ball.radius) && 
 		(ball.y >= racket1.y - racket1.length/2 - ball.radius) && 
 		(ball.y <= racket1.y + racket1.length/2 + ball.radius)) {
-		ball.speedX = -ball.speedX;
+		bounce(racket1);
 	}
 
 	if ((ball.x >= racket2.x - racket2.width - ball.radius) && 
 		(ball.y >= racket2.y - racket2.length/2 - ball.radius) && 
 		(ball.y <= racket2.y + racket2.length/2 + ball.radius)) {
-				
-		var side = (ball.y - racket2.y) / (racket2.length / 2);
-
-		var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
-		var alpha = Math.asin(ball.speedY / ballSpeed);
-
-		alpha += side * Math.PI / 6;
-
-		var maxAlpha = Math.PI * 0.4; 
-		alpha = Math.min(Math.max(alpha, -maxAlpha), maxAlpha);
-
-		ball.speedY = Math.sin(alpha) * ballSpeed;
-		ball.speedX = -Math.sqrt(ballSpeed * ballSpeed - ball.speedY * ball.speedY);
-
-		console.log(ball.speedX + ":" + ball.speedY);
+		bounce(racket2);
 	}
 
-	if ((ball.y <= racket2.length/2) || 
-		(ball.y >= wall3.length - racket2.length/2)) {
-		racket2.y = racket2.y
-	} else if(ball.y > racket2.y){
+	if (ball.y > racket2.y) {
 		racket2.y += racket2.speed * dt;
-	} else if  (ball.y < racket2.y){
+		if (racket2.y >= wall3.length - racket2.length/2 - wall1.width) {
+			racket2.y = wall3.length - racket2.length/2 - wall1.width;
+		}	
+	} else if (ball.y < racket2.y) {
 		racket2.y -= racket2.speed * dt;
+		if (racket2.y <= racket2.length/2 + wall1.width) {
+			racket2.y = racket2.length/2 + wall1.width;
+		} 
 	}	
 
 	racket1.newY = racket1.y + racket1.speed * dt;
 	racket1.y = racket1.newY;
+	
+}
 
+function bounce(racket) {
+	var side = (ball.y - racket.y) / (racket.length / 2);
+	
+	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
+	var alpha = Math.asin(ball.speedY / ballSpeed);
 
+	alpha += side * Math.PI / 6;
 
+	var maxAlpha = Math.PI * 0.4; 
+	alpha = Math.min(Math.max(alpha, -maxAlpha), maxAlpha);
+
+	ball.speedY = Math.sin(alpha) * ballSpeed;
+	ball.speedX = Math.sqrt(ballSpeed * ballSpeed - ball.speedY * ball.speedY) * 
+					(ball.speedX >= 0 ? -1 : 1);
+
+	console.log(ball.speedX + ":" + ball.speedY);
 }
 
 function move(event) {
