@@ -107,6 +107,13 @@ function calc() {
 		(ball.y <= racket2.y + racket2.length/2 + ball.radius)) {
 		ball.speedX = -ball.speedX;
 	}
+
+	if((ball.y <= racket2.length/2) || 
+		(ball.y >= wall3.length - racket2.length/2)) {
+		racket2.y = racket2.y
+	} else {
+		racket2.y = ball.y;
+	}	
 }
 
 var animFrame = window.requestAnimationFrame ||
