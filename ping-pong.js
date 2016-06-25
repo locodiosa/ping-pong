@@ -23,21 +23,21 @@ var wall4 = {
 var ball = {
 	x: 300,
 	y: 300,
-	radius: 30,
+	radius: 15,
 	speedX: 5,
 	speedY: 2
 };
 
 var racket1 = {
-	length: 200,
-	width: 50,
+	length: 100,
+	width: 20,
 	x: 0,
 	y: wall3.length/2
 };
 
 var racket2 = {
-	length: 200,
-	width: 50,
+	length: 100,
+	width: 20,
 	x: wall1.length,
 	y: wall3.length/2
 };
@@ -111,8 +111,10 @@ function calc() {
 	if((ball.y <= racket2.length/2) || 
 		(ball.y >= wall3.length - racket2.length/2)) {
 		racket2.y = racket2.y
-	} else {
-		racket2.y = ball.y;
+	} else if(ball.y > racket2.y){
+		racket2.y += 1.6;
+	} else if(ball.y < racket2.y){
+		racket2.y -= 1.6;
 	}	
 }
 
