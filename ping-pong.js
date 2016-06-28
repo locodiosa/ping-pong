@@ -161,6 +161,13 @@ function moveStop() {
 	racket1.speed = 0;
 }
 
+function moveUp() {
+	racket1.speed = -3;
+}
+function moveDown() {
+	racket1.speed = 3;
+}
+
 var animFrame = window.requestAnimationFrame ||
 				window.webkitRequestAnimationFrame ||
 				window.mozRequestAnimationFrame    ||

@@ -3,11 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<title>ping-pong</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script defer src="ping-pong.js"></script>
 	<script language="javascript" type="text/javascript">
 </script>
 </head>
 <body onkeydown="move(event)" onkeyup="moveStop()">
+	<div id="up" onmousedown="moveUp()" onmouseup="moveStop()"></div>
+	<div id="down" onmousedown="moveDown()" onmouseup="moveStop()"></div>
 	<canvas id="canvas"></canvas>
 </body> 
 </html>
