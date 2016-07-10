@@ -1,23 +1,73 @@
 "use strict";
 
+var canvas = null;
+
 var wall1 = {
 	length: 600,
-	width: 10
+	width: 10,
+
+	draw: function(context) {
+		context.fillRect(0, 0, this.length, this.width);
+	},
+
+	bounce: function(ball) {
+		if (ball.y <= wall3.length - this.width - ball.radius) {
+			ball.speedY = -ball.speedY;
+		}
+		if (ball.y >= this.width + ball.radius) {
+			ball.speedY = -ball.speedY;
+		}
+	}
 };
 
 var wall2 = {
 	length: 600,
-	width: 10
+	width: 10,
+
+	draw: function(context) {
+		context.fillRect(0, canvas.height - 10, this.length, this.width);
+	},
+
+	bounce: function(ball) {
+		if (ball.y <= wall3.length - wall1.width - ball.radius) {
+			ball.speedY = -ball.speedY;
+		}
+		if (ball.y >= wall1.width + ball.radius) {
+			ball.speedY = -ball.speedY;
+		}
+	}
 };
 
 var wall3 = {
 	length: 600,
-	width: 1
+	width: 1,
+
+	draw: function(context) {},
+
+	bounce: function(ball) {
+		if (ball.x <= wall1.length - this.width - ball.radius) {
+			ball.speedX = -ball.speedX;
+		}
+		if (ball.x >= this.width + ball.radius) {
+			ball.speedX = -ball.speedX;
+		}
+	}
 };
 
 var wall4 = {
 	length: 600,
-	width: 1
+	width: 1,
+
+	draw: function(context) {},
+
+	bounce: function(ball) {
+		if (ball.x <= wall1.length - wall3.width - ball.radius) {
+			ball.speedX = -ball.speedX;
+		}
+		if (ball.x >= wall3.width + ball.radius) {
+			ball.speedX = -ball.speedX;
+		}
+	}
 };
 
 var ball = {
@@ -25,7 +75,13 @@ var ball = {
 	y: 300,
 	radius: 15,
 	speedX: 5,
-	speedY: 2
+	speedY: 2,
+
+	draw: function(context) {
+		context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+	},
+
+	bounce: function(ball){}
 };
 
 var racket1 = {
@@ -33,7 +89,19 @@ var racket1 = {
 	width: 15,
 	x: 0,
 	y: wall3.length/2,
-	speed: 0
+	speed: 0,
+
+	draw: function(context) {
+		context.fillRect(this.x, this.y - this.length / 2, this.width, this.length);
+	},
+
+	bounce: function(ball) {
+		if ((ball.x <= this.x + this.width + ball.radius) && 
+			(ball.y >= this.y - this.length/2 - ball.radius) && 
+			(ball.y <= this.y + this.length/2 + ball.radius)) {
+				bounceRacket(this);
+		}
+	}
 };
 
 var racket2 = {
@@ -41,10 +109,22 @@ var racket2 = {
 	width: 15,
 	x: wall1.length,
 	y: wall3.length/2,
-	speed: 3
+	speed: 3,
+
+	draw: function(context) {
+		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
+	},
+
+	bounce: function(ball) {
+		if ((ball.x >= this.x - this.width - ball.radius) && 
+			(ball.y >= this.y - this.length/2 - ball.radius) && 
+			(ball.y <= this.y + this.length/2 + ball.radius)) {
+				bounceRacket(this);
+		}
+	}
 };
 
-var canvas = null;
+var objects = [wall1, wall2, wall3, wall4, racket1, racket2, ball];
 
 var mainloop = function() {
 	calc();
@@ -71,11 +151,9 @@ function draw() {
 function drawObjects(context) {
 	context.fillStyle = '#333';
 	context.beginPath();
-	context.fillRect(0, 0, wall1.length, wall1.width);
-	context.fillRect(0, canvas.height - 10, wall2.length, wall2.width);
-	context.fillRect(racket1.x, racket1.y - racket1.length / 2, racket1.width, racket1.length);
-	context.fillRect(racket2.x - racket2.width, racket2.y - racket2.length / 2, racket2.width, racket2.length);
-	context.arc(ball.x, ball.y, ball.radius, 0, 2*Math.PI);
+	objects.forEach(function(o) {
+		o.draw(context);
+	});
 	context.closePath();
 	context.fill();	
 }
@@ -88,35 +166,10 @@ function calc() {
 	ball.x = ball.newX;
 	ball.y = ball.newY;
 
-	//отскок от горизонтальных стен
-	if (ball.y <= wall3.length - wall1.width - ball.radius) {
-		ball.speedY = -ball.speedY;
-	}
-	if (ball.y >= wall1.width + ball.radius) {
-		ball.speedY = -ball.speedY;
-	}
-
-	///отскок от вертикальных стен
-	if (ball.x <= wall1.length - wall3.width - ball.radius) {
-		ball.speedX = -ball.speedX;
-	}
-	if (ball.x >= wall3.width + ball.radius) {
-		ball.speedX = -ball.speedX;
-	}
-
-	//отскок от ракетки игрока
-	if ((ball.x <= racket1.x + racket1.width + ball.radius) && 
-		(ball.y >= racket1.y - racket1.length/2 - ball.radius) && 
-		(ball.y <= racket1.y + racket1.length/2 + ball.radius)) {
-		bounce(racket1);
-	}
-
-	//отскок от ракетки компьютера
-	if ((ball.x >= racket2.x - racket2.width - ball.radius) && 
-		(ball.y >= racket2.y - racket2.length/2 - ball.radius) && 
-		(ball.y <= racket2.y + racket2.length/2 + ball.radius)) {
-		bounce(racket2);
-	}
+	objects.forEach(function(o) {
+		o.bounce(ball);
+	});
+	
 
 	//движение ракетки компьютера
 	if (ball.y > racket2.y) {
@@ -137,7 +190,7 @@ function calc() {
 	
 }
 
-function bounce(racket) {
+function bounceRacket(racket) {
 	//расчет угла отскока мяча от ракетки
 	var side = (ball.y - racket.y) / (racket.length / 2);
 	
