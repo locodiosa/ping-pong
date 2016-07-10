@@ -81,13 +81,14 @@ function drawObjects(context) {
 }
 
 function calc() {
+	//движение мяча
 	var dt = 1;					
 	ball.newX = ball.x + ball.speedX * dt;
 	ball.newY = ball.y + ball.speedY * dt;
-		
 	ball.x = ball.newX;
 	ball.y = ball.newY;
 
+	//отскок от горизонтальных стен
 	if (ball.y <= wall3.length - wall1.width - ball.radius) {
 		ball.speedY = -ball.speedY;
 	}
@@ -95,6 +96,7 @@ function calc() {
 		ball.speedY = -ball.speedY;
 	}
 
+	///отскок от вертикальных стен
 	if (ball.x <= wall1.length - wall3.width - ball.radius) {
 		ball.speedX = -ball.speedX;
 	}
@@ -102,18 +104,21 @@ function calc() {
 		ball.speedX = -ball.speedX;
 	}
 
+	//отскок от ракетки игрока
 	if ((ball.x <= racket1.x + racket1.width + ball.radius) && 
 		(ball.y >= racket1.y - racket1.length/2 - ball.radius) && 
 		(ball.y <= racket1.y + racket1.length/2 + ball.radius)) {
 		bounce(racket1);
 	}
 
+	//отскок от ракетки компьютера
 	if ((ball.x >= racket2.x - racket2.width - ball.radius) && 
 		(ball.y >= racket2.y - racket2.length/2 - ball.radius) && 
 		(ball.y <= racket2.y + racket2.length/2 + ball.radius)) {
 		bounce(racket2);
 	}
 
+	//движение ракетки компьютера
 	if (ball.y > racket2.y) {
 		racket2.y += racket2.speed * dt;
 		if (racket2.y >= wall3.length - racket2.length/2 - wall1.width) {
@@ -126,12 +131,14 @@ function calc() {
 		} 
 	}	
 
+	//движение ракетки игрока
 	racket1.newY = racket1.y + racket1.speed * dt;
 	racket1.y = racket1.newY;
 	
 }
 
 function bounce(racket) {
+	//расчет угла отскока мяча от ракетки
 	var side = (ball.y - racket.y) / (racket.length / 2);
 	
 	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
@@ -150,6 +157,7 @@ function bounce(racket) {
 }
 
 function move(event) {
+	//перемещение ракетки игрока стрелками
 	if(event.keyCode == 40) {
 		racket1.speed = 3;
 	} else if(event.keyCode == 38) {
