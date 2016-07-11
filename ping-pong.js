@@ -5,7 +5,7 @@ var boardHeight = 600;
 var boardWidth = 600;
 
 
-var wall1 = {
+var wallUpper = {
 	length: boardWidth,
 	width: 10,
 
@@ -20,7 +20,7 @@ var wall1 = {
 	}
 };
 
-var wall2 = {
+var wallBottom = {
 	length: boardWidth,
 	width: 10,
 
@@ -35,7 +35,7 @@ var wall2 = {
 	}
 };
 
-var wall3 = {
+var wallLeft = {
 	length: boardHeight,
 	width: 1,
 
@@ -48,7 +48,7 @@ var wall3 = {
 	}
 };
 
-var wall4 = {
+var wallRight = {
 	length: boardHeight,
 	width: 1,
 
@@ -79,7 +79,7 @@ var racket1 = {
 	length: 100,
 	width: 15,
 	x: 0,
-	y: wall3.length/2,
+	y: boardHeight / 2,
 	speed: 0,
 
 	draw: function(context) {
@@ -88,8 +88,8 @@ var racket1 = {
 
 	bounce: function(ball) {
 		if ((ball.x <= this.x + this.width + ball.radius) && 
-			(ball.y >= this.y - this.length/2 - ball.radius) && 
-			(ball.y <= this.y + this.length/2 + ball.radius)) {
+			(ball.y >= this.y - this.length / 2 - ball.radius) && 
+			(ball.y <= this.y + this.length / 2 + ball.radius)) {
 				bounceRacket(this);
 		}
 	}
@@ -98,8 +98,8 @@ var racket1 = {
 var racket2 = {
 	length: 100,
 	width: 15,
-	x: wall1.length,
-	y: wall3.length/2,
+	x: boardWidth,
+	y: boardHeight / 2,
 	speed: 3,
 
 	draw: function(context) {
@@ -108,14 +108,14 @@ var racket2 = {
 
 	bounce: function(ball) {
 		if ((ball.x >= this.x - this.width - ball.radius) && 
-			(ball.y >= this.y - this.length/2 - ball.radius) && 
-			(ball.y <= this.y + this.length/2 + ball.radius)) {
+			(ball.y >= this.y - this.length / 2 - ball.radius) && 
+			(ball.y <= this.y + this.length / 2 + ball.radius)) {
 				bounceRacket(this);
 		}
 	}
 };
 
-var objects = [wall1, wall2, wall3, wall4, racket1, racket2, ball];
+var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, ball];
 
 var mainloop = function() {
 	calc();
@@ -165,13 +165,13 @@ function calc() {
 	//движение ракетки компьютера
 	if (ball.y > racket2.y) {
 		racket2.y += racket2.speed * dt;
-		if (racket2.y >= wall3.length - racket2.length/2 - wall1.width) {
-			racket2.y = wall3.length - racket2.length/2 - wall1.width;
+		if (racket2.y >= boardHeight - racket2.length / 2 - wallBottom.width) {
+			racket2.y = boardHeight - racket2.length / 2 - wallBottom.width;
 		}	
 	} else if (ball.y < racket2.y) {
 		racket2.y -= racket2.speed * dt;
-		if (racket2.y <= racket2.length/2 + wall1.width) {
-			racket2.y = racket2.length/2 + wall1.width;
+		if (racket2.y <= racket2.length / 2 + wallUpper.width) {
+			racket2.y = racket2.length/2 + wallUpper.width;
 		} 
 	}	
 
@@ -196,8 +196,6 @@ function bounceRacket(racket) {
 	ball.speedY = Math.sin(alpha) * ballSpeed;
 	ball.speedX = Math.sqrt(ballSpeed * ballSpeed - ball.speedY * ball.speedY) * 
 					(ball.speedX >= 0 ? -1 : 1);
-
-	console.log(ball.speedX + ":" + ball.speedY);
 }
 
 function move(event) {
