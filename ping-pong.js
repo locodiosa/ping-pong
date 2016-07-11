@@ -178,7 +178,14 @@ function calc() {
 	//движение ракетки игрока
 	racket1.newY = racket1.y + racket1.speed * dt;
 	racket1.y = racket1.newY;
-	
+
+	if (racket1.y >= boardHeight - racket1.length / 2 - wallBottom.width) {
+		racket1.y = boardHeight - racket1.length / 2 - wallBottom.width;
+	}	
+
+	if (racket1.y <= racket1.length / 2 + wallUpper.width) {
+		racket1.y = racket1.length/2 + wallUpper.width;
+	} 
 }
 
 function bounceRacket(racket) {
