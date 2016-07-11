@@ -1,9 +1,12 @@
 "use strict";
 
 var canvas = null;
+var boardHeight = 600;
+var boardWidth = 600;
+
 
 var wall1 = {
-	length: 600,
+	length: boardWidth,
 	width: 10,
 
 	draw: function(context) {
@@ -11,60 +14,48 @@ var wall1 = {
 	},
 
 	bounce: function(ball) {
-		if (ball.y <= wall3.length - this.width - ball.radius) {
-			ball.speedY = -ball.speedY;
-		}
-		if (ball.y >= this.width + ball.radius) {
+		if (ball.y <= this.width + ball.radius) {
 			ball.speedY = -ball.speedY;
 		}
 	}
 };
 
 var wall2 = {
-	length: 600,
+	length: boardWidth,
 	width: 10,
 
 	draw: function(context) {
-		context.fillRect(0, canvas.height - 10, this.length, this.width);
+		context.fillRect(0, boardHeight - 10, this.length, this.width);
 	},
 
 	bounce: function(ball) {
-		if (ball.y <= wall3.length - wall1.width - ball.radius) {
-			ball.speedY = -ball.speedY;
-		}
-		if (ball.y >= wall1.width + ball.radius) {
+		if (ball.y >= boardHeight - this.width - ball.radius) {
 			ball.speedY = -ball.speedY;
 		}
 	}
 };
 
 var wall3 = {
-	length: 600,
+	length: boardHeight,
 	width: 1,
 
 	draw: function(context) {},
 
 	bounce: function(ball) {
-		if (ball.x <= wall1.length - this.width - ball.radius) {
-			ball.speedX = -ball.speedX;
-		}
-		if (ball.x >= this.width + ball.radius) {
+		if (ball.x <= this.width + ball.radius) {
 			ball.speedX = -ball.speedX;
 		}
 	}
 };
 
 var wall4 = {
-	length: 600,
+	length: boardHeight,
 	width: 1,
 
 	draw: function(context) {},
 
 	bounce: function(ball) {
-		if (ball.x <= wall1.length - wall3.width - ball.radius) {
-			ball.speedX = -ball.speedX;
-		}
-		if (ball.x >= wall3.width + ball.radius) {
+		if (ball.x >= boardWidth.length - this.width - ball.radius) {
 			ball.speedX = -ball.speedX;
 		}
 	}
@@ -134,8 +125,8 @@ var mainloop = function() {
 function initCanvas() {
 	if (canvas == null) {
 		canvas = document.getElementById("canvas");
-		canvas.width  = wall1.length; 
-		canvas.height = wall3.length;
+		canvas.width  = boardWidth; 
+		canvas.height = boardHeight;
 	}
 }
 
