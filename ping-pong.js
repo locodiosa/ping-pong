@@ -25,7 +25,7 @@ var wallBottom = {
 	width: 10,
 
 	draw: function(context) {
-		context.fillRect(0, boardHeight - 10, this.length, this.width);
+		context.fillRect(0, boardHeight - this.width, this.length, this.width);
 	},
 
 	bounce: function(ball) {
@@ -149,6 +149,7 @@ function drawObjects(context) {
 	context.fill();	
 }
 
+
 function calc() {
 	//движение мяча
 	var dt = 1;					
@@ -161,7 +162,6 @@ function calc() {
 		o.bounce(ball);
 	});
 	
-
 	//движение ракетки компьютера
 	if (ball.y > racket2.y) {
 		racket2.y += racket2.speed * dt;
@@ -188,22 +188,24 @@ function calc() {
 	} 
 }
 
+
 function bounceRacket(racket) {
 	//расчет угла отскока мяча от ракетки
 	var side = (ball.y - racket.y) / (racket.length / 2);
-	
 	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
 	var alpha = Math.asin(ball.speedY / ballSpeed);
 
 	alpha += side * Math.PI / 6;
 
 	var maxAlpha = Math.PI * 0.4; 
+	
 	alpha = Math.min(Math.max(alpha, -maxAlpha), maxAlpha);
 
 	ball.speedY = Math.sin(alpha) * ballSpeed;
 	ball.speedX = Math.sqrt(ballSpeed * ballSpeed - ball.speedY * ball.speedY) * 
-					(ball.speedX >= 0 ? -1 : 1);
+				(ball.speedX >= 0 ? -1 : 1);
 }
+
 
 function move(event) {
 	//перемещение ракетки игрока стрелками
