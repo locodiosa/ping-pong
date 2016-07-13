@@ -1,8 +1,10 @@
 "use strict";
 
 var canvas = null;
-var boardHeight = 600;
+var boardHeight = 550;
 var boardWidth = 600;
+var scorePlayer = 0;
+var scoreComputer = 0;
 
 
 var wallUpper = {
@@ -42,8 +44,9 @@ var wallLeft = {
 	draw: function(context) {},
 
 	bounce: function(ball) {
-		if (ball.x <= this.width + ball.radius) {
-			ball.speedX = -ball.speedX;
+		if (ball.x <= - ball.radius) {
+			countScore("scoreComputer", scoreComputer);
+			scoreComputer += 1;
 		}
 	}
 };
@@ -55,8 +58,9 @@ var wallRight = {
 	draw: function(context) {},
 
 	bounce: function(ball) {
-		if (ball.x >= boardWidth.length - this.width - ball.radius) {
-			ball.speedX = -ball.speedX;
+		if (ball.x >= boardWidth + ball.radius) {
+			countScore("scorePlayer", scorePlayer);
+			scorePlayer += 1;
 		}
 	}
 };
@@ -225,6 +229,13 @@ function moveUp() {
 }
 function moveDown() {
 	racket1.speed = 3;
+}
+
+function countScore(idName, gamer) {
+	gamer += 1;
+	ball.x = 300;
+	ball.y = 300;
+	document.getElementById(idName).innerHTML = "" + gamer + "";
 }
 
 var animFrame = window.requestAnimationFrame ||

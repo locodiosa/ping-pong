@@ -23,7 +23,23 @@
 #canvas {
 	position: absolute;
 	margin-top: 10px;
-	margin-left: 80px;
+	margin-left: 64px;
 }
 
+#scorePlayer {
+	position: absolute;
+	margin-top: 570px;
+	margin-left: 350px;
+}
 
+#scoreComputer {
+	position: absolute;
+	margin-top: 570px;
+	margin-left: 377px;
+}
+
+#score {
+	position: absolute;
+	margin-top: 570px;
+	margin-left: 364px;
+}
