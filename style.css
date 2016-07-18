@@ -24,12 +24,16 @@
 	position: absolute;
 	margin-top: 10px;
 	margin-left: 64px;
+	z-index: 1;
 }
 
 #scorePlayer {
 	position: absolute;
-	margin-top: 570px;
-	margin-left: 350px;
+	margin-top: 170px;
+	margin-left: 170px;
+	font-size: 200px;
+	color: #aaa;
+	z-index: 2;
 }
 
 #scoreComputer {
