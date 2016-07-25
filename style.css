@@ -1,6 +1,6 @@
 #up {
 	position: absolute;
-	margin-top: 290px;
+	margin-top: 280px;
 	margin-left: 7px;
 	width: 0;
 	height: 0;
@@ -11,7 +11,7 @@
 
 #down {
 	position: absolute;
-	margin-top: 360px;
+	margin-top: 350px;
 	margin-left: 7px;
 	width: 0;
 	height: 0;
@@ -22,28 +22,27 @@
 
 #canvas {
 	position: absolute;
-	margin-top: 10px;
+	margin-top: 60px;
 	margin-left: 64px;
-	z-index: 1;
 }
 
 #scorePlayer {
 	position: absolute;
-	margin-top: 170px;
-	margin-left: 170px;
-	font-size: 200px;
-	color: #aaa;
-	z-index: 2;
+	margin-top: 5px;
+	margin-left: 300px;
+	font-size: 50px;
 }
 
 #scoreComputer {
 	position: absolute;
-	margin-top: 570px;
-	margin-left: 377px;
+	margin-top: 5px;
+	margin-left: 420px;
+	font-size: 50px;
 }
 
 #score {
 	position: absolute;
-	margin-top: 570px;
+	margin-top: 2px;
 	margin-left: 364px;
+	font-size: 50px;
 }
