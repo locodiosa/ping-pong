@@ -5,7 +5,8 @@ var boardHeight = 550;
 var boardWidth = 600;
 var scorePlayer = 0;
 var scoreComputer = 0;
-
+var frameCounter = 0;
+var startSystemTime = new Date().getTime() / 1000;
 
 var wallUpper = {
 	length: boardWidth,
@@ -124,6 +125,16 @@ var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, bal
 var mainloop = function() {
 	calc();
 	draw();
+
+	frameCounter += 1;
+
+	var currentSystemTime = new Date().getTime();
+	var timeDt = currentSystemTime - startSystemTime;
+
+	if (timeDt >= 1) {
+		console.log("количество кадров:" + frameCounter + "прошло времени:" + timeDt);
+		startSystemTime = currentSystemTime; 
+	}
 }
 
 function initCanvas() {
@@ -257,3 +268,4 @@ if (animFrame !== null) {
 	var ONE_FRAME_TIME = 1000.0 / 60.0 ;
 	setInterval(mainloop, ONE_FRAME_TIME);
 }
+
