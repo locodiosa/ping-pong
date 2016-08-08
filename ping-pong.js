@@ -135,8 +135,9 @@ var mainloop = function() {
 	var currentSystemTime = new Date().getTime();
 	
 	if (currentSystemTime - startSystemTime >= 1000) {
-		console.log("количество кадров:" + frameCounter);
+		console.log("кадров в секунду:" + frameCounter);
 		startSystemTime = currentSystemTime; 
+		frameCounter = 0;
 	}
 }
 
