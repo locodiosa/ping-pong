@@ -6,7 +6,7 @@ var boardWidth = 600;
 var scorePlayer = 0;
 var scoreComputer = 0;
 var frameCounter = 0;
-var startSystemTime = new Date().getTime() / 1000;
+var startSystemTime = Date.now() / 1000;
 
 var wallUpper = {
 	length: boardWidth,
@@ -126,20 +126,13 @@ var racket2 = {
 
 var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, ball];
 
+//основной цикл
 var mainloop = function() {
 	calc();
 	draw();
-
-	frameCounter += 1;
-
-	var currentSystemTime = new Date().getTime();
-	
-	if (currentSystemTime - startSystemTime >= 1000) {
-		console.log("кадров в секунду:" + frameCounter);
-		startSystemTime = currentSystemTime; 
-		frameCounter = 0;
-	}
+	countFrames();
 }
+
 
 function initCanvas() {
 	if (canvas == null) {
@@ -251,6 +244,18 @@ function countScore(idName, gamer) {
 	ball.speedX = - ball.speedX;
 	ball.speedY = - ball.speedY;
 	document.getElementById(idName).innerHTML = "" + gamer + "";
+}
+
+//частота кадров
+function countFrames() {
+	frameCounter += 1;
+	var currentSystemTime = Date.now();
+	
+	if (currentSystemTime - startSystemTime >= 1000) {
+		console.log("кадров в секунду:" + frameCounter);
+		startSystemTime = currentSystemTime; 
+		frameCounter = 0;
+	}
 }
 
 var animFrame = window.requestAnimationFrame ||
