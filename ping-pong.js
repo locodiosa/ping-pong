@@ -47,6 +47,8 @@ var wallLeft = {
 	bounce: function(ball) {
 		if (ball.x <= - ball.radius) {
 			countScore("scoreComputer", scoreComputer);
+			ball.x = racket2.x - racket2.width - ball.radius;
+			ball.y = racket2.y;
 			scoreComputer += 1;
 		}
 	}
@@ -61,6 +63,8 @@ var wallRight = {
 	bounce: function(ball) {
 		if (ball.x >= boardWidth + ball.radius) {
 			countScore("scorePlayer", scorePlayer);
+			ball.x = racket1.x + racket1.width + ball.radius;
+			ball.y = racket2.y;
 			scorePlayer += 1;
 		}
 	}
@@ -243,8 +247,8 @@ function moveDown() {
 
 function countScore(idName, gamer) {
 	gamer += 1;
-	ball.x = 300;
-	ball.y = 300;
+	ball.speedX = - ball.speedX;
+	ball.speedY = - ball.speedY;
 	document.getElementById(idName).innerHTML = "" + gamer + "";
 }
 
