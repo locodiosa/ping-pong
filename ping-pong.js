@@ -7,6 +7,7 @@ var scorePlayer = 0;
 var scoreComputer = 0;
 var frameCounter = 0;
 var startSystemTime = Date.now() / 1000;
+var gameState = 0;
 
 var wallUpper = {
 	length: boardWidth,
@@ -47,6 +48,7 @@ var wallLeft = {
 	bounce: function(ball) {
 		if (ball.x <= - ball.radius) {
 			countScore("scoreComputer", scoreComputer);
+			gameState = 1;
 			ball.x = racket2.x - racket2.width - ball.radius;
 			ball.y = racket2.y;
 			scoreComputer += 1;
@@ -63,8 +65,9 @@ var wallRight = {
 	bounce: function(ball) {
 		if (ball.x >= boardWidth + ball.radius) {
 			countScore("scorePlayer", scorePlayer);
+			gameState = 1;
 			ball.x = racket1.x + racket1.width + ball.radius;
-			ball.y = racket2.y;
+			ball.y = racket1.y;
 			scorePlayer += 1;
 		}
 	}
@@ -109,7 +112,7 @@ var racket2 = {
 	width: 15,
 	x: boardWidth,
 	y: boardHeight / 2,
-	speed: 3,
+	speed: 2,
 
 	draw: function(context) {
 		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
@@ -128,11 +131,23 @@ var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, bal
 
 //основной цикл
 var mainloop = function() {
-	calc();
-	draw();
+	checkGameState();	
 	countFrames();
 }
 
+function checkGameState() {
+	if (gameState == 0) {
+		calc();
+		draw();
+	} else if (gameState == 1) {
+		var startTime = Date.now();
+		var currentTime = Date.now();
+		while (currentTime <= startTime + 2000) {
+			currentTime = Date.now();
+		}
+		gameState = 0;
+	}
+}
 
 function initCanvas() {
 	if (canvas == null) {
