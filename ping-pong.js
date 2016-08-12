@@ -8,7 +8,7 @@ var scoreComputer = 0;
 var frameCounter = 0;
 var startSystemTime = Date.now() / 1000;
 var gameState = 0;
-var pauseTime = 0;
+var startPauseTime = 0;
 
 
 var wallUpper = {
@@ -50,7 +50,7 @@ var wallLeft = {
 	bounce: function(ball) {
 		if (ball.x <= - ball.radius) {
 			countScore("scoreComputer", scoreComputer);
-			gameState = 1;
+			gameState = 2;
 			ball.x = racket2.x - racket2.width - ball.radius;
 			ball.y = racket2.y;
 			scoreComputer += 1;
@@ -67,7 +67,7 @@ var wallRight = {
 	bounce: function(ball) {
 		if (ball.x >= boardWidth + ball.radius) {
 			countScore("scorePlayer", scorePlayer);
-			gameState = 1;
+			gameState = 2;
 			ball.x = racket1.x + racket1.width + ball.radius;
 			ball.y = racket1.y;
 			scorePlayer += 1;
@@ -114,7 +114,7 @@ var racket2 = {
 	width: 15,
 	x: boardWidth,
 	y: boardHeight / 2,
-	speed: 2,
+	speed: 3,
 
 	draw: function(context) {
 		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
@@ -145,12 +145,16 @@ function checkGameState() {
 		calc();
 		draw();
 	} else if (gameState == 1) {
-		pauseTime += 1;
+		var pauseTime = Date.now() / 1000;
+		console.log("startPauseTime:" + startPauseTime);
 
-		if (pauseTime >= 120) {
+		if (pauseTime >= startPauseTime + 2) {
 			gameState = 0;
-			pauseTime = 0;
 		}
+	} else if (gameState == 2) {
+		startPauseTime = Date.now() / 1000;
+		console.log("startPauseTime:" + startPauseTime);
+		gameState = 1;
 	}
 }
 
@@ -269,9 +273,9 @@ function countScore(idName, gamer) {
 //частота кадров
 function countFrames() {
 	frameCounter += 1;
-	var currentSystemTime = Date.now();
+	var currentSystemTime = Date.now() / 1000;
 	
-	if (currentSystemTime - startSystemTime >= 1000) {
+	if (currentSystemTime - startSystemTime >= 1) {
 		console.log("кадров в секунду:" + frameCounter);
 		startSystemTime = currentSystemTime; 
 		frameCounter = 0;
