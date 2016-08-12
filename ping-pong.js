@@ -146,14 +146,12 @@ function checkGameState() {
 		draw();
 	} else if (gameState == 1) {
 		var pauseTime = Date.now() / 1000;
-		console.log("startPauseTime:" + startPauseTime);
-
+		
 		if (pauseTime >= startPauseTime + 2) {
 			gameState = 0;
 		}
 	} else if (gameState == 2) {
 		startPauseTime = Date.now() / 1000;
-		console.log("startPauseTime:" + startPauseTime);
 		gameState = 1;
 	}
 }
@@ -199,17 +197,20 @@ function calc() {
 	});
 	
 	//движение ракетки компьютера
-	if (ball.y > racket2.y) {
-		racket2.y += racket2.speed * dt;
-		if (racket2.y >= boardHeight - racket2.length / 2 - wallBottom.width) {
-			racket2.y = boardHeight - racket2.length / 2 - wallBottom.width;
-		}	
-	} else if (ball.y < racket2.y) {
-		racket2.y -= racket2.speed * dt;
-		if (racket2.y <= racket2.length / 2 + wallUpper.width) {
+	if (ball.speedX > 0){
+		if (ball.y > racket2.y) {
+			racket2.y += racket2.speed * dt;
+			if (racket2.y >= boardHeight - racket2.length / 2 - wallBottom.width) {
+				racket2.y = boardHeight - racket2.length / 2 - wallBottom.width;
+			}	
+		} else if (ball.y < racket2.y) {
+			racket2.y -= racket2.speed * dt;
+			if (racket2.y <= racket2.length / 2 + wallUpper.width) {
 			racket2.y = racket2.length/2 + wallUpper.width;
-		} 
-	}	
+			} 
+		}	
+	}
+	
 
 	//движение ракетки игрока
 	racket1.newY = racket1.y + racket1.speed * dt;
