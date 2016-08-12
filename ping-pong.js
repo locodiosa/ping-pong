@@ -8,6 +8,8 @@ var scoreComputer = 0;
 var frameCounter = 0;
 var startSystemTime = Date.now() / 1000;
 var gameState = 0;
+var pauseTime = 0;
+
 
 var wallUpper = {
 	length: boardWidth,
@@ -129,23 +131,26 @@ var racket2 = {
 
 var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, ball];
 
-//основной цикл
+
+/////////////////////////////////////основной цикл//////////////////////////////
 var mainloop = function() {
 	checkGameState();	
 	countFrames();
 }
+////////////////////////////////////////////////////////////////////////////////
+
 
 function checkGameState() {
 	if (gameState == 0) {
 		calc();
 		draw();
 	} else if (gameState == 1) {
-		var startTime = Date.now();
-		var currentTime = Date.now();
-		while (currentTime <= startTime + 2000) {
-			currentTime = Date.now();
+		pauseTime += 1;
+
+		if (pauseTime >= 120) {
+			gameState = 0;
+			pauseTime = 0;
 		}
-		gameState = 0;
 	}
 }
 
