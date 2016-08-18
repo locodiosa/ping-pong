@@ -1,48 +1,42 @@
 #up {
 	position: absolute;
-	margin-top: 280px;
-	margin-left: 7px;
-	width: 0;
-	height: 0;
-	border-left: 20px solid transparent;
-	border-right: 20px solid transparent;
-	border-bottom: 50px solid #333;
+	margin-top: 60px;
+	margin-left: 15px;
+	width: 600px;
+	height: 300px;
 }
 
 #down {
 	position: absolute;
-	margin-top: 350px;
-	margin-left: 7px;
-	width: 0;
-	height: 0;
-	border-left: 20px solid transparent;
-	border-right: 20px solid transparent;
-	border-top: 50px solid #333;
+	margin-top: 360px;
+	margin-left: 15px;
+	width: 600px;
+	height: 300px;
 }
 
 #canvas {
 	position: absolute;
 	margin-top: 60px;
-	margin-left: 64px;
+	margin-left: 15px;
 }
 
 #scorePlayer {
 	position: absolute;
 	margin-top: 5px;
-	margin-left: 300px;
+	margin-left: 251px;
 	font-size: 50px;
 }
 
 #scoreComputer {
 	position: absolute;
 	margin-top: 5px;
-	margin-left: 420px;
+	margin-left: 371px;
 	font-size: 50px;
 }
 
 #score {
 	position: absolute;
 	margin-top: 2px;
-	margin-left: 364px;
+	margin-left: 315px;
 	font-size: 50px;
 }
