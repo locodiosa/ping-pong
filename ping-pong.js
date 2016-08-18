@@ -1,8 +1,8 @@
 "use strict";
 
 var canvas = null;
-var boardHeight = document.documentElement.clientHeight - 70;
-var boardWidth = document.documentElement.clientWidth - 20;
+var boardHeight = document.documentElement.clientHeight * 0.85;
+var boardWidth = document.documentElement.clientWidth * 0.95;
 /*var maxBoardHeight = 550;
 var maxBoardWidth = 600;
 if (boardWidth > maxBoardWidth) {
