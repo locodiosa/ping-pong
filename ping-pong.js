@@ -204,7 +204,7 @@ function drawObjects(context) {
 
 function calc() {
 	//движение мяча
-	var dt = 1;					
+	var dt = Math.max(boardHeight, boardWidth) * 0.0017;					
 	ball.newX = ball.x + ball.speedX * dt;
 	ball.newY = ball.y + ball.speedY * dt;
 	ball.x = ball.newX;
