@@ -3,14 +3,14 @@
 var canvas = null;
 var boardHeight = document.documentElement.clientHeight - 70;
 var boardWidth = document.documentElement.clientWidth - 20;
-var maxBoardHeight = 550;
+/*var maxBoardHeight = 550;
 var maxBoardWidth = 600;
 if (boardWidth > maxBoardWidth) {
 	boardWidth = maxBoardWidth;
 };
 if (boardHeight > maxBoardHeight) {
 	boardHeight = maxBoardHeight;
-};
+};*/
 
 var scorePlayer = 0;
 var scoreComputer = 0;
