@@ -53,6 +53,15 @@ var wallLeft = {
 			gameState = 2;
 			ball.x = racket2.x - racket2.width - ball.radius;
 			ball.y = racket2.y;
+			
+			if (ball.y >= boardHeight / 2) {
+				ball.speedX = 5;
+				ball.speedY = - 2;
+			} else {
+				ball.speedX = 5;
+				ball.speedY = 2;
+			};
+			
 			scoreComputer += 1;
 		}
 	}
@@ -70,6 +79,15 @@ var wallRight = {
 			gameState = 2;
 			ball.x = racket1.x + racket1.width + ball.radius;
 			ball.y = racket1.y;
+			
+			if (ball.y >= boardHeight / 2) {
+				ball.speedX = - 5;
+				ball.speedY = - 2;
+			} else {
+				ball.speedX = - 5;
+				ball.speedY = 2;
+			};
+
 			scorePlayer += 1;
 		}
 	}
