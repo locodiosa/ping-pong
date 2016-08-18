@@ -1,4 +1,6 @@
-
+#body{
+	width: 100%;
+}
 
 #up {
 	position: absolute;
@@ -21,7 +23,7 @@
 #canvas {
 	position: absolute;
 	margin-top: 60px;
-	margin-left: 15px;
+	margin-left: 1%;
 	z-index: 1;
 }
 
