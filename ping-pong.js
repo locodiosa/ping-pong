@@ -3,15 +3,6 @@
 var canvas = null;
 var boardHeight = document.documentElement.clientHeight * 0.85;
 var boardWidth = document.documentElement.clientWidth * 0.95;
-/*var maxBoardHeight = 550;
-var maxBoardWidth = 600;
-if (boardWidth > maxBoardWidth) {
-	boardWidth = maxBoardWidth;
-};
-if (boardHeight > maxBoardHeight) {
-	boardHeight = maxBoardHeight;
-};*/
-
 var scorePlayer = 0;
 var scoreComputer = 0;
 var frameCounter = 0;
@@ -22,7 +13,7 @@ var startPauseTime = 0;
 
 var wallUpper = {
 	length: boardWidth,
-	width: 10,
+	width: boardHeight * 0.02,
 
 	draw: function(context) {
 		context.fillRect(0, 0, this.length, this.width);
@@ -37,7 +28,7 @@ var wallUpper = {
 
 var wallBottom = {
 	length: boardWidth,
-	width: 10,
+	width: boardHeight * 0.02,
 
 	draw: function(context) {
 		context.fillRect(0, boardHeight - this.width, this.length, this.width);
@@ -103,11 +94,11 @@ var wallRight = {
 };
 
 var ball = {
-	x: 300,
-	y: 300,
-	radius: 15,
-	speedX: 5,
-	speedY: 2,
+	x: boardWidth / 2,
+	y: boardHeight / 2,
+	radius: Math.min(boardWidth, boardHeight) * 0.03,
+	speedX: boardWidth * 0.008,
+	speedY: boardHeight * 0.003,
 
 	draw: function(context) {
 		context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
@@ -117,8 +108,8 @@ var ball = {
 };
 
 var racket1 = {
-	length: 100,
-	width: 15,
+	length: boardHeight * 0.17,
+	width: boardWidth * 0.025,
 	x: 0,
 	y: boardHeight / 2,
 	speed: 0,
@@ -137,11 +128,11 @@ var racket1 = {
 };
 
 var racket2 = {
-	length: 100,
-	width: 15,
+	length: boardHeight * 0.17,
+	width: boardWidth * 0.025,
 	x: boardWidth,
 	y: boardHeight / 2,
-	speed: 3,
+	speed: boardHeight * 0.005,
 
 	draw: function(context) {
 		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
