@@ -257,13 +257,6 @@ function moveStop() {
 	racket1.speed = 0;
 }
 
-obj.addEventListener('touchstart', function(event) {
-if (event.targetTouches.length == 1) {
-var myclick=event.targetTouches[0]; 
-moveUp();
-}
-}, false);
-
 function moveUp() {
 	racket1.speed = -3;
 }
