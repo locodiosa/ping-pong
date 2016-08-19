@@ -3,6 +3,14 @@
 var canvas = null;
 var boardHeight = document.documentElement.clientHeight * 0.85;
 var boardWidth = document.documentElement.clientWidth * 0.95;
+
+if (boardWidth > boardHeight * 1.3) {
+	boardWidth = boardHeight * 1.3;
+}
+if (boardHeight > boardWidth * 1.3) {
+	boardHeight = boardWidth * 1.3;
+}
+
 var scorePlayer = 0;
 var scoreComputer = 0;
 var frameCounter = 0;
