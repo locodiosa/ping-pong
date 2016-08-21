@@ -226,12 +226,12 @@ function calc() {
 	
 	//движение ракетки компьютера
 	if (ball.speedX > 0) {
-		if (ball.y > racket2.y) {
+		if (ball.y > racket2.y + racket2.length / 2) {
 			racket2.y += racket2.speed * dt;
 			if (racket2.y >= boardHeight - racket2.length / 2 - wallBottom.width) {
 				racket2.y = boardHeight - racket2.length / 2 - wallBottom.width;
 			}	
-		} else if (ball.y < racket2.y) {
+		} else if (ball.y < racket2.y - racket2.length / 2) {
 			racket2.y -= racket2.speed * dt;
 			if (racket2.y <= racket2.length / 2 + wallUpper.width) {
 				racket2.y = racket2.length/2 + wallUpper.width;
