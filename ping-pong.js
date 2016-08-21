@@ -17,6 +17,7 @@ var frameCounter = 0;
 var startSystemTime = Date.now() / 1000;
 var gameState = 0;
 var startPauseTime = 0;
+var dt = Math.max(boardWidth, boardWidth) * 0.002;
 
 
 var wallUpper = {
@@ -154,6 +155,13 @@ var racket2 = {
 			(ball.speedX > 0)) {
 				bounceRacket(this);
 		}
+		if (ball.speedX < 0) {
+			if (this.y > boardHeight / 2) {
+				this.y -= this.speed * dt;
+			} else if (this.y < boardHeight / 2) {
+				this.y += this.speed * dt;
+			}
+		}
 	}
 };
 
@@ -214,7 +222,6 @@ function drawObjects(context) {
 
 function calc() {
 	//движение мяча
-	var dt = Math.max(boardWidth, boardWidth) * 0.002;					
 	ball.newX = ball.x + ball.speedX * dt;
 	ball.newY = ball.y + ball.speedY * dt;
 	ball.x = ball.newX;
@@ -239,7 +246,6 @@ function calc() {
 		}	
 	}
 	
-
 	//движение ракетки игрока
 	racket1.newY = racket1.y + racket1.speed * dt;
 	racket1.y = racket1.newY;
