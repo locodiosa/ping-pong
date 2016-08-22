@@ -17,7 +17,7 @@ var frameCounter = 0;
 var startSystemTime = Date.now() / 1000;
 var gameState = 0;
 var startPauseTime = 0;
-var dt = Math.max(boardWidth, boardWidth) * 0.002;
+var dt = 1;
 
 
 var wallUpper = {
@@ -106,8 +106,8 @@ var ball = {
 	x: boardWidth / 2,
 	y: boardHeight / 2,
 	radius: Math.min(boardWidth, boardHeight) * 0.03,
-	speedX: boardWidth * 0.008,
-	speedY: boardHeight * 0.003,
+	speedX: 5,
+	speedY: 2,
 
 	draw: function(context) {
 		context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
@@ -142,7 +142,7 @@ var racket2 = {
 	width: boardWidth * 0.025,
 	x: boardWidth,
 	y: boardHeight / 2,
-	speed: Math.max(boardHeight, boardWidth) * 0.004,
+	speed: boardHeight * 0.004,
 
 	draw: function(context) {
 		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
