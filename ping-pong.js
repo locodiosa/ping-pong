@@ -263,7 +263,7 @@ function calc() {
 function bounceRacket(racket) {
 	//расчет угла отскока мяча от ракетки
 	var side = (ball.y - racket.y) / (racket.length / 2);
-	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
+	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.05;
 	var alpha = Math.asin(ball.speedY / ballSpeed);
 
 	alpha += side * Math.PI / 6;
@@ -275,6 +275,7 @@ function bounceRacket(racket) {
 	ball.speedY = Math.sin(alpha) * ballSpeed;
 	ball.speedX = Math.sqrt(ballSpeed * ballSpeed - ball.speedY * ball.speedY) * 
 				(ball.speedX >= 0 ? -1 : 1);
+	console.log("ballSpeed = " + ballSpeed);
 }
 
 
@@ -311,7 +312,6 @@ function countFrames() {
 	var currentSystemTime = Date.now() / 1000;
 	
 	if (currentSystemTime - startSystemTime >= 1) {
-		console.log("кадров в секунду:" + frameCounter);
 		startSystemTime = currentSystemTime; 
 		frameCounter = 0;
 	}
