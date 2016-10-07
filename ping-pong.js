@@ -65,11 +65,11 @@ var wallLeft = {
 			ball.y = racket2.y;
 			
 			if (ball.y >= boardHeight / 2) {
-				ball.speedX = 5;
-				ball.speedY = - 2;
+				ball.speedX = boardWidth * 0.005;
+				ball.speedY = - boardWidth * 0.002;
 			} else {
-				ball.speedX = 5;
-				ball.speedY = 2;
+				ball.speedX = boardWidth * 0.005;
+				ball.speedY = boardWidth * 0.002;
 			};
 			
 			scoreComputer += 1;
@@ -91,11 +91,11 @@ var wallRight = {
 			ball.y = racket1.y;
 			
 			if (ball.y >= boardHeight / 2) {
-				ball.speedX = - 5;
-				ball.speedY = - 2;
+				ball.speedX = - boardWidth * 0.005;
+				ball.speedY = - boardWidth * 0.002;
 			} else {
-				ball.speedX = - 5;
-				ball.speedY = 2;
+				ball.speedX = - boardWidth * 0.005;
+				ball.speedY = boardWidth * 0.002;
 			};
 
 			scorePlayer += 1;
@@ -106,9 +106,9 @@ var wallRight = {
 var ball = {
 	x: boardWidth / 2,
 	y: boardHeight / 2,
-	radius: Math.min(boardWidth, boardHeight) * 0.03,
-	speedX: 5,
-	speedY: 2,
+	radius: boardWidth * 0.02,
+	speedX: boardWidth * 0.005,
+	speedY: boardWidth * 0.002,
 
 	draw: function(context) {
 		context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
@@ -119,7 +119,7 @@ var ball = {
 
 var racket1 = {
 	length: boardHeight * 0.17,
-	width: boardWidth * 0.025,
+	width: boardWidth * 0.02,
 	x: 0,
 	y: boardHeight / 2,
 	speed: 0,
@@ -140,10 +140,10 @@ var racket1 = {
 
 var racket2 = {
 	length: boardHeight * 0.17,
-	width: boardWidth * 0.025,
+	width: boardWidth * 0.02,
 	x: boardWidth,
 	y: boardHeight / 2,
-	speed: boardHeight * 0.004,
+	speed: boardWidth * 0.004,
 
 	draw: function(context) {
 		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
@@ -283,9 +283,9 @@ function bounceRacket(racket) {
 function move(event) {
 	//перемещение ракетки игрока стрелками
 	if(event.keyCode == 40) {
-		racket1.speed = Math.max(boardHeight, boardWidth) * 0.004;
+		racket1.speed = boardWidth * 0.004;
 	} else if(event.keyCode == 38) {
-		racket1.speed = - Math.max(boardHeight, boardWidth) * 0.004;
+		racket1.speed = - boardWidth * 0.004;
 	}
 }
 
@@ -294,10 +294,10 @@ function moveStop() {
 }
 
 function moveUp() {
-	racket1.speed = - Math.max(boardHeight, boardWidth) * 0.004;
+	racket1.speed = - boardWidth * 0.004;
 }
 function moveDown() {
-	racket1.speed = Math.max(boardHeight, boardWidth) * 0.004;
+	racket1.speed = boardWidth * 0.004;
 }
 
 function countScore(idName, gamer) {
