@@ -1,15 +1,16 @@
 "use strict";
 
 var canvas = null;
-var boardHeight = document.documentElement.clientHeight * 0.85;
-var boardWidth = document.documentElement.clientWidth * 0.95;
 
-if (boardWidth > boardHeight * 1.3) {
+var clientWidth = document.documentElement.clientWidth;
+var clientHeight = document.documentElement.clientHeight;
+var boardWidth = clientWidth * 0.9;
+var boardHeight = boardWidth * 0.7;
+
+if (clientWidth >= clientHeight * 1.3) {
+	boardHeight = clientHeight * 0.8;
 	boardWidth = boardHeight * 1.3;
-}
-if (boardHeight > boardWidth * 1.3) {
-	boardHeight = boardWidth * 1.3;
-}
+} 
 
 var scorePlayer = 0;
 var scoreComputer = 0;
