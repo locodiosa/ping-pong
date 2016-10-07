@@ -156,10 +156,13 @@ var racket2 = {
 			(ball.speedX > 0)) {
 				bounceRacket(this);
 		}
+		
 		if (ball.speedX < 0) {
-			if (this.y > boardHeight / 2) {
+			if (this.y >= boardHeight / 2) {
 				this.y -= this.speed * dt;
-			} else if (this.y < boardHeight / 2) {
+			} 
+
+			if (this.y < boardHeight / 2){
 				this.y += this.speed * dt;
 			}
 		}
