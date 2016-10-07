@@ -1,7 +1,48 @@
-#body{
-	width: 100%;
-	height: 100%
+body, html {
+	font-family: Verdana;
+	margin:0px;
+	padding:0px;
+	height: 100%;
+	width: 100%
 }
+
+#container {
+	margin: auto;
+	width: 95%;
+	height: 95%;
+	position: relative;
+}
+
+#scoreArea {
+	width: 95%;
+	height: 5%;
+	position: absolute;
+}
+
+#scorePlayer {
+	position: absolute;
+	left: 35%;
+	font-size: 2em;
+}
+
+#scoreComputer {
+	position: absolute;
+	left: 65%;
+	font-size: 2em;
+}
+
+#score {
+	position: absolute;
+	left: 50%;
+	font-size: 2em;
+}
+
+#canvas {
+	position: absolute;
+	top: 10%;
+	z-index: 1;
+}
+
 
 #up {
 	position: absolute;
@@ -21,30 +62,5 @@
 	z-index: 2
 }
 
-#canvas {
-	position: absolute;
-	margin-top: 60px;
-	margin-left: 1%;
-	z-index: 1;
-}
 
-#scorePlayer {
-	position: absolute;
-	margin-top: 5px;
-	margin-left: 251px;
-	font-size: 50px;
-}
 
-#scoreComputer {
-	position: absolute;
-	margin-top: 5px;
-	margin-left: 371px;
-	font-size: 50px;
-}
-
-#score {
-	position: absolute;
-	margin-top: 2px;
-	margin-left: 315px;
-	font-size: 50px;
-}
