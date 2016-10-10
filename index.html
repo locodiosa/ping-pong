@@ -10,17 +10,15 @@
 </head>
 <body onkeydown="move(event)" onkeyup="moveStop()">
 	<div id="container"> 
-		<div id="up" ontouchstart="moveUp()" ontouchend="moveStop()"></div>
-		<div id="down" ontouchstart="moveDown()" ontouchend="moveStop()"></div>
+		<div id="up" onmousedown="moveUp()" onmouseup="moveStop()" ontouchstart="moveUp()" ontouchend="moveStop()"></div>
+		<div id="down" onmousedown="moveDown()" onmouseup="moveStop()" ontouchstart="moveDown()" ontouchend="moveStop()"></div>
 		<div id="scoreArea">
 			<div id="scorePlayer">0</div>
 			<div id="score">:</div>
 			<div id="scoreComputer">0</div>
 		</div>
 		<canvas id="canvas"></canvas>
-		
 	</div>
-	
 </body> 
 </html>
 
