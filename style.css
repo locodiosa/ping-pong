@@ -13,12 +13,6 @@ body, html {
 	position: relative
 }
 
-#scoreArea {
-	width: 95%;
-	height: 5%;
-	position: absolute
-}
-
 #scorePlayer {
 	position: absolute;
 	left: 35%;
@@ -27,13 +21,14 @@ body, html {
 
 #scoreComputer {
 	position: absolute;
-	left: 65%;
+	right: 45%;
 	font-size: 2em
 }
 
 #score {
 	position: absolute;
-	left: 50%;
+	left: 44%;
+	right: 54%;
 	font-size: 2em
 }
 

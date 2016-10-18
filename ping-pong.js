@@ -10,7 +10,7 @@ var boardHeight = boardWidth * 0.7;
 if (clientWidth >= clientHeight * 1.3) {
 	boardHeight = clientHeight * 0.8;
 	boardWidth = boardHeight * 1.3;
-} 
+};
 
 var scorePlayer = 0;
 var scoreComputer = 0;
