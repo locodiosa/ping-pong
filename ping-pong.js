@@ -207,7 +207,7 @@ function initCanvas() {
 function draw() {
 	initCanvas();
 	var context = canvas.getContext('2d');
-	context.fillStyle   = '#ccc'; 
+	context.fillStyle = '#ccc'; 
 	context.fillRect(0, 0, canvas.width, canvas.height);	
 	
 	drawObjects(context);
