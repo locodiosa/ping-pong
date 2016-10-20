@@ -20,7 +20,7 @@ body, html {
 #scoreArea {
 	position: relative;
 	top: 0;
-	width: 100%;
+	width: 98%;
 	height: 10%;
 	margin: auto
 }
@@ -29,21 +29,28 @@ body, html {
 	position: absolute;
 	left: 40%;
 	top: 0;
-	font-size: 8vh
+	font-size: 8vh;
+	width: 6%;
+	text-align: center
 }
 
 #scoreComputer {
 	position: absolute;
 	right: 40%;
 	top: 0;
-	font-size: 8vh
+	font-size: 8vh;
+	width: 6%;
+	text-align: center
 }
 
 #score {
+	display: inline-block;
 	position: absolute;
-	left: 50%;
-	right: 50%;
-	font-size: 8vh
+	left: 47%;
+	right: 53%;
+	font-size: 8vh;
+	width: 6%;
+	text-align: center
 }
 
 #canvas {
