@@ -14,7 +14,12 @@ body, html {
 	margin: auto;
 	width: 95%;
 	height: 95%;
-	position: relative
+	position: relative;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 #scoreArea {
@@ -25,32 +30,27 @@ body, html {
 	margin: auto
 }
 
-#scorePlayer {
+.score {
 	position: absolute;
-	left: 40%;
 	top: 0;
 	font-size: 8vh;
+	text-align: center;
 	width: 6%;
-	text-align: center
+
+}
+
+#scorePlayer {
+	left: 40%;
 }
 
 #scoreComputer {
-	position: absolute;
 	right: 40%;
-	top: 0;
-	font-size: 8vh;
-	width: 6%;
-	text-align: center
 }
 
 #score {
 	display: inline-block;
-	position: absolute;
 	left: 47%;
 	right: 53%;
-	font-size: 8vh;
-	width: 6%;
-	text-align: center
 }
 
 #canvas {
