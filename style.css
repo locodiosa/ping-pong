@@ -1,9 +1,13 @@
+/*div {
+	border: solid 1px #000
+}*/
+
 body, html {
 	font-family: Verdana;
 	margin:0px;
 	padding:0px;
 	height: 100%;
-	width: 100%
+	width: 100%;
 }
 
 #container {
@@ -13,31 +17,38 @@ body, html {
 	position: relative
 }
 
+#scoreArea {
+	position: relative;
+	top: 0;
+	width: 100%;
+	height: 10%;
+	margin: auto
+}
+
 #scorePlayer {
 	position: absolute;
 	left: 40%;
 	top: 0;
-	font-size: 2em
+	font-size: 8vh
 }
 
 #scoreComputer {
 	position: absolute;
 	right: 40%;
 	top: 0;
-	font-size: 2em
+	font-size: 8vh
 }
 
 #score {
 	position: absolute;
 	left: 50%;
 	right: 50%;
-	font-size: 2em
+	font-size: 8vh
 }
 
 #canvas {
 	display: block;
 	position: relative;
-	top: 10%;
 	margin: auto;
 	z-index: 1
 }
