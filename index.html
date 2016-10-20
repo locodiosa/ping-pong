@@ -2,14 +2,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!--Запрет масштабирования (зума)-->
 	<title>ping-pong</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script defer src="ping-pong.js"></script>
 	<script language="javascript" type="text/javascript">
 </script>
 </head>
-<body onkeydown="move(event)" onkeyup="moveStop()">
+<body onkeydown="move(event)" onkeyup="moveStop()" onresize="resize()" >
 	<div id="container"> 
 		<div id="up" onmousedown="moveUp()" onmouseup="moveStop()" ontouchstart="moveUp()" ontouchend="moveStop()"></div>
 		<div id="down" onmousedown="moveDown()" onmouseup="moveStop()" ontouchstart="moveDown()" ontouchend="moveStop()"></div>

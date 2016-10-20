@@ -341,6 +341,12 @@ if (animFrame !== null) {
 	setInterval(mainloop, ONE_FRAME_TIME);
 }
 
+function resize() {
+	clientWidth = document.documentElement.clientWidth;
+	clientHeight = document.documentElement.clientHeight;
+}
+
+
 //запрет прокрутки страницы
 document.onmousewheel = document.onwheel = function() { 
 	return false;
@@ -351,7 +357,6 @@ document.onkeydown = function(e) {
 		return false;
 	} 
 }
-
 
 
 
