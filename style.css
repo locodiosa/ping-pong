@@ -1,6 +1,6 @@
-/*div {
+div {
 	border: solid 1px #000
-}*/
+}
 
 body, html {
 	font-family: Verdana;
@@ -24,32 +24,34 @@ body, html {
 
 #scoreArea {
 	position: relative;
-	top: 0;
-	width: 98%;
+	bottom: 0;
+	width: 30%;
 	height: 10%;
 	margin: auto
 }
 
 .score {
+	display: table;
 	position: absolute;
-	top: 0;
-	font-size: 8vh;
-	text-align: center;
-	width: 6%;
+	bottom: 0;
+	font-size: 8vmin;
+	width: 30%;
 }
 
 #scorePlayer {
-	left: 40%;
+	left: 0;
+	text-align: right;
 }
 
 #scoreComputer {
-	right: 40%;
+	right: 0;
+	text-align: left;
 }
 
 #score {
-	display: inline-block;
-	left: 47%;
-	right: 53%;
+	
+	left: 35%;
+	text-align: center;
 }
 
 #canvas {

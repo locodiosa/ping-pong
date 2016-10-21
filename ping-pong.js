@@ -143,7 +143,7 @@ var racket2 = {
 	width: boardWidth * 0.02,
 	x: boardWidth,
 	y: boardHeight / 2,
-	speed: boardWidth * 0.004,
+	speed: boardWidth * 0.001,
 
 	draw: function(context) {
 		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
