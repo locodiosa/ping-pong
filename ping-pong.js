@@ -21,6 +21,8 @@ var startPauseTime = 0;
 var dt = 1;
 
 
+/////////////////////////////////////////Объекты/////////////////////////////////////////
+
 var wallUpper = {
 	length: boardWidth,
 	width: boardHeight * 0.02,
@@ -117,11 +119,12 @@ var ball = {
 	bounce: function(ball){}
 };
 
+//ракетка игрока
 var racket1 = {
 	length: boardHeight * 0.17,
 	width: boardWidth * 0.02,
-	x: 0,
-	y: boardHeight / 2,
+	x: 0, //левый край
+	y: boardHeight / 2, //центр
 	speed: 0,
 
 	draw: function(context) {
@@ -138,12 +141,13 @@ var racket1 = {
 	}
 };
 
+//ракетка компьютера
 var racket2 = {
 	length: boardHeight * 0.17,
 	width: boardWidth * 0.02,
-	x: boardWidth,
-	y: boardHeight / 2,
-	speed: boardWidth * 0.001,
+	x: boardWidth, //правый край
+	y: boardHeight / 2, //центр
+	speed: boardWidth * 0.004,
 
 	draw: function(context) {
 		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
@@ -172,7 +176,7 @@ var racket2 = {
 var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, ball];
 
 
-/////////////////////////////////////основной цикл//////////////////////////////
+/////////////////////////////////////Основной цикл//////////////////////////////
 var mainloop = function() {
 	checkGameState();	
 	countFrames();
@@ -283,26 +287,32 @@ function bounceRacket(racket) {
 }
 
 
+///////////////////////////Движение ракетки игрока/////////////////////////////////////////
+
+//перемещение ракетки игрока стрелками
 function move(event) {
-	//перемещение ракетки игрока стрелками
 	if(event.keyCode == 40) {
 		racket1.speed = boardWidth * 0.004;
 	} else if(event.keyCode == 38) {
 		racket1.speed = - boardWidth * 0.004;
 	}
 }
-
+//остановка ракетки игрока
 function moveStop() {
 	racket1.speed = 0;
 }
-
+//движение ракетки игрока наверх
 function moveUp() {
 	racket1.speed = - boardWidth * 0.004;
 }
+//движение ракетки игрока вниз
 function moveDown() {
 	racket1.speed = boardWidth * 0.004;
 }
+////////////////////////////////////////////////////////////////////////////////////////////
 
+
+//подсчёт очков
 function countScore(idName, gamer) {
 	gamer += 1;
 	ball.speedX = - ball.speedX;
