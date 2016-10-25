@@ -4,13 +4,15 @@ var canvas = null;
 
 var clientWidth = document.documentElement.clientWidth;
 var clientHeight = document.documentElement.clientHeight;
-var boardWidth = clientWidth * 0.9;
-var boardHeight = boardWidth * 0.7;
+var scale = clientWidth * 0.9;
 
 if (clientWidth >= clientHeight * 1.3) {
-	boardHeight = clientHeight * 0.8;
-	boardWidth = boardHeight * 1.3;
+	clientHeight = clientHeight * 0.8;
+	scale = clientHeight * 1.3;
 };
+
+var boardWidth = 1 * scale;
+var boardHeight = boardWidth * 0.7;
 
 var scorePlayer = 0;
 var scoreComputer = 0;
@@ -350,12 +352,6 @@ if (animFrame !== null) {
 	var ONE_FRAME_TIME = 1000.0 / 60.0 ;
 	setInterval(mainloop, ONE_FRAME_TIME);
 }
-
-function resize() {
-	clientWidth = document.documentElement.clientWidth;
-	clientHeight = document.documentElement.clientHeight;
-}
-
 
 //запрет прокрутки страницы
 document.onmousewheel = document.onwheel = function() { 
