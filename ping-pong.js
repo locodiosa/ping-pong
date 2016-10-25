@@ -10,7 +10,7 @@ if (clientWidth >= clientHeight * 1.3) {
 	clientHeight = clientHeight * 0.8;
 	scale = clientHeight * 1.3;
 };
-
+	
 var boardWidth = 1 * scale;
 var boardHeight = boardWidth * 0.7;
 
@@ -331,6 +331,19 @@ function countFrames() {
 		startSystemTime = currentSystemTime; 
 		frameCounter = 0;
 	}
+}
+
+function resize() {
+	clientWidth = document.documentElement.clientWidth;
+	clientHeight = document.documentElement.clientHeight;
+	scale = clientWidth * 0.9;
+
+	if (clientWidth >= clientHeight * 1.3) {
+		clientHeight = clientHeight * 0.8;
+		scale = clientHeight * 1.3;
+	};
+	boardWidth = 1 * scale;
+	boardHeight = boardWidth * 0.7;
 }
 
 var animFrame = window.requestAnimationFrame ||
