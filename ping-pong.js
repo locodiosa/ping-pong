@@ -10,9 +10,11 @@ if (clientWidth >= clientHeight * 1.3) {
 	clientHeight = clientHeight * 0.8;
 	scale = clientHeight * 1.3;
 };
+
+var heightCoef = 0.7
 	
 var boardWidth = 1;
-var boardHeight = 0.7;
+var boardHeight = heightCoef;
 
 var scorePlayer = 0;
 var scoreComputer = 0;
@@ -27,7 +29,7 @@ var dt = 1;
 
 var wallUpper = {
 	length: 1,
-	width: 0.014,
+	width: heightCoef * 0.02,
 
 	draw: function(context) {
 		context.fillRect(0, 0, this.length * scale, this.width * scale);
@@ -45,18 +47,18 @@ var wallBottom = {
 	width: 0.014,
 
 	draw: function(context) {
-		context.fillRect(0, 0.7 * scale - this.width * scale, this.length * scale, this.width * scale);
+		context.fillRect(0, heightCoef * scale - this.width * scale, this.length * scale, this.width * scale);
 	},
 
 	bounce: function(ball) {
-		if ((ball.y >= 0.7 - this.width - ball.radius) && (ball.speedY > 0)) {
+		if ((ball.y >= heightCoef - this.width - ball.radius) && (ball.speedY > 0)) {
 			ball.speedY = -ball.speedY;
 		}
 	}
 };
 
 var wallLeft = {
-	length: 0.7,
+	length: heightCoef,
 	width: 0.001,
 
 	draw: function(context) {},
@@ -82,7 +84,7 @@ var wallLeft = {
 };
 
 var wallRight = {
-	length: 0.7,
+	length: heightCoef,
 	width: 0.001,
 
 	draw: function(context) {},
@@ -109,7 +111,7 @@ var wallRight = {
 
 var ball = {
 	x: 0.5,
-	y: 0.35,
+	y: heightCoef / 2,
 	radius: 0.02,
 	speedX: 0.005,
 	speedY: 0.002,
@@ -123,10 +125,10 @@ var ball = {
 
 //ракетка игрока
 var racket1 = {
-	length: 0.119,
+	length: heightCoef * 0.17,
 	width: 0.02,
 	x: 0, //левый край
-	y: 0.35, //центр
+	y: heightCoef / 2, //центр
 	speed: 0,
 
 	draw: function(context) {
@@ -145,10 +147,10 @@ var racket1 = {
 
 //ракетка компьютера
 var racket2 = {
-	length: 0.119,
+	length: heightCoef * 0.17,
 	width: 0.02,
 	x: 1, //правый край
-	y: 0.35, //центр
+	y: heightCoef / 2, //центр
 	speed: 0.004,
 
 	draw: function(context) {
