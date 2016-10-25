@@ -11,8 +11,8 @@ if (clientWidth >= clientHeight * 1.3) {
 	scale = clientHeight * 1.3;
 };
 	
-var boardWidth = 1 * scale;
-var boardHeight = boardWidth * 0.7;
+var boardWidth = 1;
+var boardHeight = 0.7;
 
 var scorePlayer = 0;
 var scoreComputer = 0;
@@ -26,11 +26,11 @@ var dt = 1;
 /////////////////////////////////////////Объекты/////////////////////////////////////////
 
 var wallUpper = {
-	length: boardWidth,
-	width: boardHeight * 0.02,
+	length: 1,
+	width: 0.014,
 
 	draw: function(context) {
-		context.fillRect(0, 0, this.length, this.width);
+		context.fillRect(0, 0, this.length * scale, this.width * scale);
 	},
 
 	bounce: function(ball) {
@@ -41,23 +41,23 @@ var wallUpper = {
 };
 
 var wallBottom = {
-	length: boardWidth,
-	width: boardHeight * 0.02,
+	length: 1,
+	width: 0.014,
 
 	draw: function(context) {
-		context.fillRect(0, boardHeight - this.width, this.length, this.width);
+		context.fillRect(0, 0.7 * scale - this.width * scale, this.length * scale, this.width * scale);
 	},
 
 	bounce: function(ball) {
-		if ((ball.y >= boardHeight - this.width - ball.radius) && (ball.speedY > 0)) {
+		if ((ball.y >= 0.7 - this.width - ball.radius) && (ball.speedY > 0)) {
 			ball.speedY = -ball.speedY;
 		}
 	}
 };
 
 var wallLeft = {
-	length: boardHeight,
-	width: 1,
+	length: 0.7,
+	width: 0.001,
 
 	draw: function(context) {},
 
@@ -69,11 +69,11 @@ var wallLeft = {
 			ball.y = racket2.y;
 			
 			if (ball.y >= boardHeight / 2) {
-				ball.speedX = boardWidth * 0.005;
-				ball.speedY = - boardWidth * 0.002;
+				ball.speedX = 0.005;
+				ball.speedY = - 0.002;
 			} else {
-				ball.speedX = boardWidth * 0.005;
-				ball.speedY = boardWidth * 0.002;
+				ball.speedX = 0.005;
+				ball.speedY = 0.002;
 			};
 			
 			scoreComputer += 1;
@@ -82,24 +82,24 @@ var wallLeft = {
 };
 
 var wallRight = {
-	length: boardHeight,
-	width: 1,
+	length: 0.7,
+	width: 0.001,
 
 	draw: function(context) {},
 
 	bounce: function(ball) {
-		if (ball.x >= boardWidth + ball.radius) {
+		if (ball.x >= 1 + ball.radius) {
 			countScore("scorePlayer", scorePlayer);
 			gameState = 2;
 			ball.x = racket1.x + racket1.width + ball.radius;
 			ball.y = racket1.y;
 			
-			if (ball.y >= boardHeight / 2) {
-				ball.speedX = - boardWidth * 0.005;
-				ball.speedY = - boardWidth * 0.002;
+			if (ball.y >= 0.35) {
+				ball.speedX = - 0.005;
+				ball.speedY = - 0.002;
 			} else {
-				ball.speedX = - boardWidth * 0.005;
-				ball.speedY = boardWidth * 0.002;
+				ball.speedX = - 0.005;
+				ball.speedY = 0.002;
 			};
 
 			scorePlayer += 1;
@@ -108,14 +108,14 @@ var wallRight = {
 };
 
 var ball = {
-	x: boardWidth / 2,
-	y: boardHeight / 2,
-	radius: boardWidth * 0.02,
-	speedX: boardWidth * 0.005,
-	speedY: boardWidth * 0.002,
+	x: 0.5,
+	y: 0.35,
+	radius: 0.02,
+	speedX: 0.005,
+	speedY: 0.002,
 
 	draw: function(context) {
-		context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+		context.arc(this.x * scale, this.y * scale, this.radius * scale, 0, 2*Math.PI);
 	},
 
 	bounce: function(ball){}
@@ -123,14 +123,14 @@ var ball = {
 
 //ракетка игрока
 var racket1 = {
-	length: boardHeight * 0.17,
-	width: boardWidth * 0.02,
+	length: 0.119,
+	width: 0.02,
 	x: 0, //левый край
-	y: boardHeight / 2, //центр
+	y: 0.35, //центр
 	speed: 0,
 
 	draw: function(context) {
-		context.fillRect(this.x, this.y - this.length / 2, this.width, this.length);
+		context.fillRect(this.x * scale, this.y * scale - this.length * scale / 2, this.width * scale, this.length * scale);
 	},
 
 	bounce: function(ball) {
@@ -145,14 +145,14 @@ var racket1 = {
 
 //ракетка компьютера
 var racket2 = {
-	length: boardHeight * 0.17,
-	width: boardWidth * 0.02,
-	x: boardWidth, //правый край
-	y: boardHeight / 2, //центр
-	speed: boardWidth * 0.004,
+	length: 0.119,
+	width: 0.02,
+	x: 1, //правый край
+	y: 0.35, //центр
+	speed: 0.004,
 
 	draw: function(context) {
-		context.fillRect(this.x - this.width, this.y - this.length / 2, this.width, this.length);
+		context.fillRect(this.x * scale - this.width * scale, this.y * scale - this.length * scale / 2, this.width * scale, this.length * scale);
 	},
 
 	bounce: function(ball) {
@@ -164,11 +164,11 @@ var racket2 = {
 		}
 		
 		if (ball.speedX < 0) {
-			if (this.y >= boardHeight / 2) {
+			if (this.y >= 0.35) {
 				this.y -= this.speed * dt;
 			} 
 
-			if (this.y < boardHeight / 2){
+			if (this.y < 0.35){
 				this.y += this.speed * dt;
 			}
 		}
@@ -203,11 +203,9 @@ function checkGameState() {
 }
 
 function initCanvas() {
-	if (canvas == null) {
-		canvas = document.getElementById("canvas");
-		canvas.width  = boardWidth; 
-		canvas.height = boardHeight;
-	}
+	canvas = document.getElementById("canvas");
+	canvas.width  = 1 * scale; 
+	canvas.height = 0.7 * scale;
 }
 
 function draw() {
@@ -342,8 +340,6 @@ function resize() {
 		clientHeight = clientHeight * 0.8;
 		scale = clientHeight * 1.3;
 	};
-	boardWidth = 1 * scale;
-	boardHeight = boardWidth * 0.7;
 }
 
 var animFrame = window.requestAnimationFrame ||
