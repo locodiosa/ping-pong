@@ -211,7 +211,7 @@ function initCanvas() {
 
 	var gameArea = document.getElementById('gameArea');
 	gameArea.style.width = (canvas.width) + 'px';
-	gameArea.style.height = (canvas.height * 1.08) + 'px' ;
+	gameArea.style.height = (canvas.height) + 'px' ;
 	gameArea.style.marginTop = (-canvas.height / 2) + 'px';
 	gameArea.style.marginLeft = (-canvas.width / 2) + 'px';
 }
