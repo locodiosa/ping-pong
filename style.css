@@ -81,7 +81,12 @@ body, html {
 #gameArea {
 	position: absolute;
 	left: 50%;
-	top: 50%
+	top: 50%;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 #scoreArea {
@@ -117,7 +122,6 @@ body, html {
 }
 
 #score {
-	
 	left: 35%;
 	text-align: center
 }
