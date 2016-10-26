@@ -323,6 +323,14 @@ function countScore(idName, gamer) {
 	ball.speedX = - ball.speedX;
 	ball.speedY = - ball.speedY;
 	document.getElementById(idName).innerHTML = "" + gamer + "";
+	if (gamer == 10) {
+		document.getElementById(idName).innerHTML = "" + gamer + "";
+		document.getElementById("gameOver").innerHTML = "ИГРА ОКОНЧЕНА";
+		
+		setTimeout(function() {
+    		location.reload();
+    	}, 2000);
+	}
 }
 
 //частота кадров
