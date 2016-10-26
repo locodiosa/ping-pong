@@ -60,7 +60,7 @@ var wallBottom = {
 var wallLeft = {
 	length: heightCoef,
 	width: 0.001,
-	
+
 	draw: function(context) {},
 
 	bounce: function(ball) {
@@ -219,9 +219,6 @@ function initCanvas() {
 function draw() {
 	initCanvas();
 	var context = canvas.getContext('2d');
-	context.fillStyle = '#ccc'; 
-	context.fillRect(0, 0, canvas.width, canvas.height);	
-	
 	drawObjects(context);
 }
 
