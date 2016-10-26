@@ -208,6 +208,12 @@ function initCanvas() {
 	canvas = document.getElementById("canvas");
 	canvas.width  = 1 * scale; 
 	canvas.height = 0.7 * scale;
+
+	var gameArea = document.getElementById('gameArea');
+	gameArea.style.width = (canvas.width) + 'px';
+	gameArea.style.height = (canvas.height * 1.08) + 'px' ;
+	gameArea.style.marginTop = (-canvas.height / 2) + 'px';
+	gameArea.style.marginLeft = (-canvas.width / 2) + 'px';
 }
 
 function draw() {

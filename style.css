@@ -10,7 +10,7 @@ body, html {
 	width: 100%;
 }
 
-#container {
+/*#container {
 	margin: auto;
 	width: 95%;
 	height: 95%;
@@ -76,3 +76,64 @@ body, html {
 	height: 40%;
   	z-index: 2
   }
+*/
+
+#gameArea {
+	position: absolute;
+	left: 50%;
+	top: 50%
+}
+
+#scoreArea {
+	position: absolute;
+	top: 0;
+	width: 30%;
+	height: 8%;
+	margin: auto
+}
+
+#canvas {
+	position: absolute;
+	top: 8%;
+	z-index: 1
+}
+
+.score {
+	display: table;
+	position: absolute;
+	bottom: 0;
+	font-size: 8vmin;
+	width: 30%
+}
+
+#scorePlayer {
+	left: 0;
+	text-align: right
+}
+
+#scoreComputer {
+	right: 0;
+	text-align: left
+}
+
+#score {
+	
+	left: 35%;
+	text-align: center
+}
+
+#up {
+	position: absolute;
+	top: 8%;
+	width: 100%;
+	height: 46%;
+	z-index: 2
+}
+
+#down {
+  	position: absolute;
+	top: 54%;
+  	width: 100%;
+	height: 46%;
+	z-index: 2
+}
