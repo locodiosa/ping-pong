@@ -4,10 +4,10 @@ var canvas = null;
 
 var clientWidth = document.documentElement.clientWidth;
 var clientHeight = document.documentElement.clientHeight;
-var scale = clientWidth * 0.9;
+var scale = clientWidth * 0.95;
 
 if (clientWidth >= clientHeight * 1.3) {
-	clientHeight = clientHeight * 0.8;
+	clientHeight = clientHeight;
 	scale = clientHeight * 1.3;
 };
 
@@ -342,10 +342,10 @@ function countFrames() {
 function resize() {
 	clientWidth = document.documentElement.clientWidth;
 	clientHeight = document.documentElement.clientHeight;
-	scale = clientWidth * 0.9;
+	scale = clientWidth * 0.95;
 
 	if (clientWidth >= clientHeight * 1.3) {
-		clientHeight = clientHeight * 0.8;
+		clientHeight = clientHeight;
 		scale = clientHeight * 1.3;
 	};
 }
