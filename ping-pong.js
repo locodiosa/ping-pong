@@ -60,7 +60,7 @@ var wallBottom = {
 var wallLeft = {
 	length: heightCoef,
 	width: 0.001,
-
+	
 	draw: function(context) {},
 
 	bounce: function(ball) {
