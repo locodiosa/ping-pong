@@ -417,7 +417,7 @@ document.onkeydown = function(e) {
 }
 
 //управление наклоном телефона
-window.rotationRate('devicemotion', onMotionChange, true);
+window.addEventListener('devicemotion', onMotionChange, true);
 
 function onMotionChange(e) {
 	var ag = e.rotationRate;
