@@ -417,12 +417,12 @@ document.onkeydown = function(e) {
 }
 
 //управление наклоном телефона
-window.addEventListener('devicemotion', onMotionChange, true);
+window.rotationRate('devicemotion', onMotionChange, true);
 
 function onMotionChange(e) {
-	var ag = e.accelerationIncludingGravity;
+	var ag = e.rotationRate;
 
-	if (clientWidth > clientHeight) {
+	/*if (clientWidth > clientHeight) {
 		if (ag.x > ag.y + 1 && ag.x > ag.z + 1) { 
 			moveDown();
 		}
@@ -435,6 +435,25 @@ function onMotionChange(e) {
 		}
 
 		if(ag.z > ag.x && ag.z > ag.y) {
+    		moveUp();
+		}
+	}*/
+
+	
+
+	 if (clientWidth > clientHeight) {
+		if (ag.beta > ag.gamma && ag.beta > ag.alpha) { 
+			moveDown();
+		}
+		if (ag.alpha > ag.beta && ag.alpha > ag.gamma) { 
+    		moveUp();
+		}
+	} else if (clientWidth < clientHeight) {
+		if (ag.gamma > ag.beta && ag.gamma > ag.alpha) {
+			moveDown();
+		}
+
+		if(ag.alpha > ag.beta && ag.alpha > ag.gamma) {
     		moveUp();
 		}
 	}
