@@ -208,7 +208,9 @@ function initCanvas() {
 	canvas = document.getElementById("canvas");
 	canvas.width  = 1 * scale; 
 	canvas.height = 0.7 * scale;
+}
 
+function initAreas() {
 	var gameArea = document.getElementById('gameArea');
 	gameArea.style.width = (canvas.width) + 'px';
 	gameArea.style.height = (canvas.height) + 'px' ;
@@ -224,6 +226,7 @@ function initCanvas() {
 
 function draw() {
 	initCanvas();
+	initAreas();
 	var context = canvas.getContext('2d');
 	drawObjects(context);
 }
