@@ -416,9 +416,8 @@ document.onkeydown = function(e) {
 	} 
 }
 
-
-var nodeAG = document.getElementById('accelerationIncludingGravity');
-var maxAG = 0;
+//управление наклоном телефона
+window.addEventListener('devicemotion', onMotionChange, true);
 
 function onMotionChange(e) {
 	var ag = e.accelerationIncludingGravity;
@@ -440,5 +439,3 @@ function onMotionChange(e) {
 		}
 	}
 }
-
-window.addEventListener('devicemotion', onMotionChange, true);
