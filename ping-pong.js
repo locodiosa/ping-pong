@@ -211,6 +211,7 @@ function initCanvas() {
 }
 
 function initAreas() {
+	//области отрисовки и нажатия
 	var gameArea = document.getElementById('gameArea');
 	gameArea.style.width = (canvas.width) + 'px';
 	gameArea.style.height = (canvas.height) + 'px' ;
@@ -303,31 +304,34 @@ function bounceRacket(racket) {
 
 ///////////////////////////Движение ракетки игрока/////////////////////////////////////////
 
-//перемещение ракетки игрока стрелками
 function move(event) {
+	//перемещение ракетки игрока стрелками
 	if(event.keyCode == 40) {
 		racket1.speed = boardWidth * 0.004;
 	} else if(event.keyCode == 38) {
 		racket1.speed = - boardWidth * 0.004;
 	}
 }
-//остановка ракетки игрока
+
 function moveStop() {
+	//остановка ракетки игрока
 	racket1.speed = 0;
 }
-//движение ракетки игрока наверх
+
 function moveUp() {
+	//движение ракетки игрока наверх
 	racket1.speed = - boardWidth * 0.004;
 }
-//движение ракетки игрока вниз
+
 function moveDown() {
+	//движение ракетки игрока вниз
 	racket1.speed = boardWidth * 0.004;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//подсчёт очков
 function countScore(idName, gamer) {
+	//подсчёт очков
 	gamer += 1;
 	ball.speedX = - ball.speedX;
 	ball.speedY = - ball.speedY;
@@ -342,8 +346,8 @@ function countScore(idName, gamer) {
 	}
 }
 
-//частота кадров
 function countFrames() {
+	//частота кадров
 	frameCounter += 1;
 	var currentSystemTime = Date.now() / 1000;
 	
@@ -354,6 +358,7 @@ function countFrames() {
 }
 
 function resize() {
+	//изменение масштаба отрисовки
 	clientWidth = document.documentElement.clientWidth;
 	clientHeight = document.documentElement.clientHeight;
 	scale = clientWidth * 0.95;
@@ -383,6 +388,7 @@ if (animFrame !== null) {
 	var ONE_FRAME_TIME = 1000.0 / 60.0 ;
 	setInterval(mainloop, ONE_FRAME_TIME);
 }
+
 
 //запрет прокрутки страницы
 document.onmousewheel = document.onwheel = function() { 
