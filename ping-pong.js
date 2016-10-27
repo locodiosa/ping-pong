@@ -423,10 +423,10 @@ function onMotionChange(e) {
 	var ag = e.accelerationIncludingGravity;
 
 	if (clientWidth > clientHeight) {
-		if (ag.x > ag.y +2 && ag.x > ag.z) { 
+		if ((ag.x > ag.y) && (ag.x > ag.z) && (ag.x - ag.y >= 2) && (ag.x - ag.z >= 2)) { 
 			moveDown();
 		}
-		if (ag.z > ag.x && ag.z > ag.y) { 
+		if ((ag.z > ag.x) && (ag.z > ag.y) && (ag.z - ag.x >= 2) && (ag.z - ag.y >= 2)) { 
     		moveUp();
 		}
 	} else if (clientWidth < clientHeight) {
