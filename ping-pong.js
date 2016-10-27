@@ -194,10 +194,13 @@ function checkGameState() {
 		draw();
 	} else if (gameState == 1) {
 		var pauseTime = Date.now() / 1000;
+		moveRacket1();
+		draw();
 		
 		if (pauseTime >= startPauseTime + 2) {
 			gameState = 0;
 		}
+
 	} else if (gameState == 2) {
 		startPauseTime = Date.now() / 1000;
 		gameState = 1;
@@ -244,7 +247,13 @@ function drawObjects(context) {
 
 
 function calc() {
-	//движение мяча
+	moveBall();	
+	moveRacket1();
+	moveRacket2();
+}
+
+function moveBall() {
+//движение мяча
 	ball.newX = ball.x + ball.speedX * dt;
 	ball.newY = ball.y + ball.speedY * dt;
 	ball.x = ball.newX;
@@ -253,8 +262,10 @@ function calc() {
 	objects.forEach(function(o) {
 		o.bounce(ball);
 	});
-	
-	//движение ракетки компьютера
+}
+
+function moveRacket2() {
+//движение ракетки компьютера
 	if (ball.speedX > 0) {
 		if (ball.y > racket2.y + racket2.length / 4) {
 			racket2.y += racket2.speed * dt;
@@ -268,8 +279,10 @@ function calc() {
 			} 
 		}	
 	}
-	
-	//движение ракетки игрока
+}
+
+function moveRacket1() {
+//движение ракетки игрока
 	racket1.newY = racket1.y + racket1.speed * dt;
 	racket1.y = racket1.newY;
 
