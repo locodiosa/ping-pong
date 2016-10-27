@@ -415,3 +415,17 @@ document.onkeydown = function(e) {
 		return false;
 	} 
 }
+
+
+var nodeAG = document.getElementById('accelerationIncludingGravity');
+   var maxAG = 0;
+   function onMotionChange(e) {
+     
+     var ag = e.accelerationIncludingGravity;
+    
+     
+     if(ag.x > ag.y && ag.x > ag.z){ moveDown();}
+    
+     if(ag.z > ag.x && ag.z > ag.y){ moveUp();}
+  }
+  window.addEventListener('devicemotion', onMotionChange, true);
