@@ -418,14 +418,27 @@ document.onkeydown = function(e) {
 
 
 var nodeAG = document.getElementById('accelerationIncludingGravity');
-   var maxAG = 0;
-   function onMotionChange(e) {
-     
-     var ag = e.accelerationIncludingGravity;
-    
-     
-     if(ag.x > ag.y && ag.x > ag.z){ moveDown();}
-    
-     if(ag.z > ag.x && ag.z > ag.y){ moveUp();}
-  }
-  window.addEventListener('devicemotion', onMotionChange, true);
+var maxAG = 0;
+
+function onMotionChange(e) {
+	var ag = e.accelerationIncludingGravity;
+
+	if (clientWidth > clientHeight) {
+		if (ag.x > ag.y && ag.x > ag.z) { 
+			moveDown();
+		}
+		if (ag.z > ag.x && ag.z > ag.y) { 
+    		moveUp();
+		}
+	} else if (clientWidth < clientHeight) {
+		if (ag.y > ag.x && ag.y > ag.z) {
+			moveDown();
+		}
+
+		if(ag.z > ag.x && ag.z > ag.y) {
+    		moveUp();
+		}
+	}
+}
+
+window.addEventListener('devicemotion', onMotionChange, true);
