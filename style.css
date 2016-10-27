@@ -23,21 +23,28 @@ body, html {
 }
 
 #scoreArea {
-	position: relative;
-	top: 65%;
-	bottom: 55%;
-	width: 30%;
-	margin: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -20%;
+	margin-top: -10%;
+	width: 40%;
+	height: 30%;
 	z-index: 2
 }
 
 .score {
-	display: table;
+	display: table-cell;
 	position: absolute;
-	bottom: 0;
+	top: 50%;
+	margin-top: -25%;
+	padding: 0;
+	vertical-align: center;
 	font-size: 20vmin;
 	color: #333;
 	width: 30%;
+	height: 95%;
+	line-height: 95%;
 	opacity: 0.7;
 	z-index: 1
 }
@@ -48,12 +55,14 @@ body, html {
 }
 
 #scoreComputer {
-	right: 0;
+	left: 100%;
+	margin-left: -30%;
 	text-align: left;
 }
 
 #score {
-	left: 40%;
+	left: 50%;
+	margin-left: -15%;
 	text-align: center;
 }
 
