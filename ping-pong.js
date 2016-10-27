@@ -442,18 +442,18 @@ function onMotionChange(e) {
 	
 
 	 if (clientWidth > clientHeight) {
-		if (ag.beta > ag.gamma && ag.beta > ag.alpha) { 
+		if (ag.gamma > 0) { 
 			moveDown();
 		}
-		if (ag.alpha > ag.beta && ag.alpha > ag.gamma) { 
+		if (ag.gamma < 0) { 
     		moveUp();
 		}
 	} else if (clientWidth < clientHeight) {
-		if (ag.gamma > ag.beta && ag.gamma > ag.alpha) {
+		if (ag.beta > 0) {
 			moveDown();
 		}
 
-		if(ag.alpha > ag.beta && ag.alpha > ag.gamma) {
+		if(ag.beta < 0) {
     		moveUp();
 		}
 	}
