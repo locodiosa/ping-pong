@@ -194,9 +194,11 @@ function checkGameState() {
 		draw();
 	} else if (gameState == 1) {
 		var pauseTime = Date.now() / 1000;
-		moveRacket1();
-		draw();
-		
+		if (ball.x > 0.5) {
+			moveRacket1();
+			draw();
+		}
+				
 		if (pauseTime >= startPauseTime + 2) {
 			gameState = 0;
 		}
