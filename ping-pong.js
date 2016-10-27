@@ -214,6 +214,12 @@ function initCanvas() {
 	gameArea.style.height = (canvas.height) + 'px' ;
 	gameArea.style.marginTop = (-canvas.height / 2) + 'px';
 	gameArea.style.marginLeft = (-canvas.width / 2) + 'px';
+	var upArea = document.getElementById('up');
+	upArea.style.width = (document.documentElement.clientWidth) + 'px';
+	upArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
+	var downArea = document.getElementById('down');
+	downArea.style.width = (document.documentElement.clientWidth) + 'px';
+	downArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
 }
 
 function draw() {
