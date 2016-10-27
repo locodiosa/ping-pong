@@ -423,10 +423,10 @@ function onMotionChange(e) {
 	var ag = e.accelerationIncludingGravity;
 
 	if (clientWidth > clientHeight) {
-		if ((ag.x - ag.y >= 20) && (ag.x - ag.z >= 20)) { 
+		if ((ag.x - ag.y >= 1000) && (ag.x - ag.z >= 1000)) { 
 			moveDown();
 		}
-		if ((ag.z - ag.x >= 20) && (ag.z - ag.y >= 20)) { 
+		if ((ag.z - ag.x >= 1000) && (ag.z - ag.y >= 1000)) { 
     		moveUp();
 		}
 	} else if (clientWidth < clientHeight) {
