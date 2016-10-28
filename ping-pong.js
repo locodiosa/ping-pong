@@ -424,7 +424,7 @@ document.onkeydown = function(e) {
 
 //////////////////////////////управление наклоном телефона//////////////////////////////////
 
-var insensitivityArea = 2; //ширина зоны нечувствительности
+var insensitivityArea = 1; //ширина зоны нечувствительности
 
 window.addEventListener('devicemotion', onMotionChange, true);
 
