@@ -435,16 +435,17 @@ function onMotionChange(e) {
 				moveStop();
 			}
 		}
+
 	} else if (clientWidth < clientHeight) {
 		if (ag.y > ag.x && ag.y > ag.z) {
 			moveDown();
-			if (ag.y < ag.x + 3) {
+			if (ag.y < ag.x + 5) {
 				moveStop();
 			}
 		}
 		if(ag.z > ag.x && ag.z > ag.y) {
     		moveUp();
-    		if (ag.z < ag.x + 3) {
+    		if (ag.z < ag.x + 5) {
 				moveStop();
 			}
 		}
