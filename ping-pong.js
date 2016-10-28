@@ -473,7 +473,8 @@ function sensor() {
 
 function touch() {
 	test = 2;
-	}
+	sensor();
+}
 
 
 
