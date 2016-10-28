@@ -427,8 +427,8 @@ var test = 1;
 
 function sensor() {
 	if (test == 2) {
-		return false;
-	} else {
+		return;
+	} else if (test == 1) {
 		var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
 		window.addEventListener('devicemotion', onMotionChange, true);
@@ -467,6 +467,7 @@ function sensor() {
 				}
 			}
 		}
+		test = 1;
 	}
 }
 
