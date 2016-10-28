@@ -466,7 +466,7 @@ function sensor() {
 
 function touch() {
 	window.addEventListener('devicemotion', onMotionChange, true);
-	function onMotionChange(e) {}
+	function onMotionChange() {}
 }
 
 
