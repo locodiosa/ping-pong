@@ -467,8 +467,8 @@ function sensor() {
 function touch() {
 	window.addEventListener('devicemotion', onMotionChange, true);
 
-	function onMotionChange() {
-		moveStop();
+	function onMotionChange(e) {
+		var ag = e.accelerationIncludingGravity;
 	}
 }
 
