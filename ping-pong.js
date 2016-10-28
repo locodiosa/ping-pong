@@ -425,26 +425,26 @@ function onMotionChange(e) {
 	if (clientWidth > clientHeight) {
 		if (ag.x > ag.y && ag.x > ag.z) { 
 			moveDown();
-			if (ag.x < ag.y + 4) {
+			if (ag.x < ag.y + 3) {
 				moveStop();
 			}
 		}
 		if (ag.z > ag.x && ag.z > ag.y) { 
     		moveUp();
-    		if (ag.z < ag.x + 4) {
+    		if (ag.z < ag.x + 3) {
 				moveStop();
 			}
 		}
 	} else if (clientWidth < clientHeight) {
 		if (ag.y > ag.x && ag.y > ag.z) {
 			moveDown();
-			if (ag.y < ag.x + 4) {
+			if (ag.y < ag.x + 3) {
 				moveStop();
 			}
 		}
 		if(ag.z > ag.x && ag.z > ag.y) {
     		moveUp();
-    		if (ag.z < ag.x + 4) {
+    		if (ag.z < ag.x + 3) {
 				moveStop();
 			}
 		}
