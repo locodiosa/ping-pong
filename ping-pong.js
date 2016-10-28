@@ -425,12 +425,15 @@ function onMotionChange(e) {
 	if (clientWidth > clientHeight) {
 		if (ag.x > ag.y && ag.x > ag.z) { 
 			moveDown();
-			if (ag.x < ag.y + 2000) {
+			if (ag.x < ag.y + 20) {
 				moveStop();
 			}
 		}
 		if (ag.z > ag.x && ag.z > ag.y) { 
     		moveUp();
+    		if (ag.z < ag.x + 20) {
+				moveStop();
+			}
 		}
 	} else if (clientWidth < clientHeight) {
 		if (ag.y > ag.x && ag.y > ag.z) {
