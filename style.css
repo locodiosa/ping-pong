@@ -3,7 +3,7 @@
 }*/
 
 body, html {
-	font-family: Verdana;
+	font-family: Arial;
 	margin:0px;
 	padding:0px;
 	height: 100%;
@@ -99,27 +99,34 @@ body, html {
 	z-index: 1
 }
 
-@media screen and (orientation: landscape) {
 
-	#touch {
-		border: solid 1px #000;
-		position: absolute;
-		top: 20%;
-		font-size: 7vmin;
-		color: #333;
+@media handheld and (screen) and (orientation: landscape) {
+	
+	.button {
+		display: table-cell;
+		vertical-align: center;
+		border-radius: 8px;
+		border: 2px groove #aaa;
 		width: 10%;
 		height: 10%;
+		text-align: center;
+		font-weight: bold;
+		font-family: Arial;
+		font-size: 1em;
+		color: #333;
+		cursor: pointer;
+
+	}
+	
+	#touch {
+		position: absolute;
+		top: 5%;
 		z-index: 4
 	}
 
 	#sensor {
-		border: solid 1px #000;
 		position: absolute;
-		top: 40%;
-		font-size: 7vmin;
-		color: #333;
-		width: 10%;
-		height: 10%;
+		top: 20%;
 		z-index: 4
 	}
 }
