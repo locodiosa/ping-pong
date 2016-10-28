@@ -423,56 +423,49 @@ document.onkeydown = function(e) {
 }
 
 //////////////////////////////управление наклоном телефона//////////////////////////////////
-var test = 1;
-
 function sensor() {
-	if (test == 2) {
-		return;
-	} else if (test == 1) {
-		var insensitivityArea = 0.5; //ширина зоны нечувствительности
+	var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
-		window.addEventListener('devicemotion', onMotionChange, true);
+	window.addEventListener('devicemotion', onMotionChange, true);
 
-		function onMotionChange(e) {
-			var ag = e.accelerationIncludingGravity;
+	function onMotionChange(e) {
+		var ag = e.accelerationIncludingGravity;
 
-			if (clientWidth > clientHeight) {
-				//альбомная ориентация экрана
-				if (ag.x > ag.y && ag.x > ag.z) { 
-					moveDown();
-					if (ag.x < ag.y + insensitivityArea) {
-						moveStop();
-					}
+		if (clientWidth > clientHeight) {
+			//альбомная ориентация экрана
+			if (ag.x > ag.y && ag.x > ag.z) { 
+				moveDown();
+				if (ag.x < ag.y + insensitivityArea) {
+					moveStop();
 				}
-				if (ag.z > ag.x && ag.z > ag.y) { 
-		    		moveUp();
-		    		if (ag.z < ag.x + insensitivityArea) {
-						moveStop();
-					}
+			}
+			if (ag.z > ag.x && ag.z > ag.y) { 
+	    		moveUp();
+	    		if (ag.z < ag.x + insensitivityArea) {
+					moveStop();
 				}
+			}
 
-			} else if (clientWidth < clientHeight) {
-				//портретная ориентация экрана
-				if (ag.y > ag.x && ag.y > ag.z) {
-					moveDown();
-					if (ag.y < ag.z + insensitivityArea) {
-						moveStop();
-					}
+		} else if (clientWidth < clientHeight) {
+			//портретная ориентация экрана
+			if (ag.y > ag.x && ag.y > ag.z) {
+				moveDown();
+				if (ag.y < ag.z + insensitivityArea) {
+					moveStop();
 				}
-				if (ag.z > ag.x && ag.z > ag.y) {
-		    		moveUp();
-		    		if (ag.z < ag.y + insensitivityArea) {
-						moveStop();
-					}
+			}
+			if (ag.z > ag.x && ag.z > ag.y) {
+	    		moveUp();
+	    		if (ag.z < ag.y + insensitivityArea) {
+					moveStop();
 				}
 			}
 		}
-		test = 1;
 	}
 }
 
 function touch() {
-	window.removeEventListener('devicemotion', onMotionChange, true);
+	window.removeEventListener('devicemotion', onMotionChange);
 }
 
 
