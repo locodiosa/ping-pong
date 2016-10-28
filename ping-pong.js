@@ -423,6 +423,8 @@ document.onkeydown = function(e) {
 }
 
 //////////////////////////////управление наклоном телефона//////////////////////////////////
+var test = 1;
+
 function sensor() {
 	var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
@@ -461,15 +463,15 @@ function sensor() {
 				}
 			}
 		}
+		if (test == 2) {
+			return;
+		}
 	}
 }
 
 function touch() {
-	window.addEventListener('devicemotion', onMotionChange, true);
-
-	function onMotionChange() {
-		return;
+	test = 2;
 	}
-}
+
 
 
