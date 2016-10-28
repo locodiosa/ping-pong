@@ -100,64 +100,57 @@ body, html {
 }
 
 
-@media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) and (max-device-width: 1024px)  {
-	
+@media screen and (max-device-width: 1024px)  {
 	.button {
 		display: table-cell;
 		vertical-align: center;
 		border-radius: 8px;
 		border: 2px groove #aaa;
-		width: 10%;
-		height: 9%;
 		text-align: center;
 		font-weight: bold;
 		font-family: Arial;
 		font-size: 1em;
 		color: #333;
 		cursor: pointer;
-
 	}
 	
 	#touch {
 		position: absolute;
-		top: 4%;
 		z-index: 4
 	}
 
 	#sensor {
 		position: absolute;
-		top: 16%;
 		z-index: 4
 	}
 }
 
-@media screen and (orientation: portrait) and (max-device-width: 1024px)  {
-	
+@media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) and (max-device-width: 1024px)  {
 	.button {
-		display: table-cell;
-		vertical-align: center;
-		border-radius: 8px;
-		border: 2px groove #aaa;
-		width: 20%;
-		height: 4%;
-		text-align: center;
-		font-weight: bold;
-		font-family: Arial;
-		font-size: 1em;
-		color: #333;
-		cursor: pointer;
-
+		width: 10%;
+		height: 9%;
 	}
 	
 	#touch {
-		position: absolute;
-		top: 2%;
-		z-index: 4
+		top: 4%;
 	}
 
 	#sensor {
-		position: absolute;
+		top: 16%;
+	}
+}
+
+@media screen and (orientation: portrait) and (max-device-width: 1024px)  {
+	.button {
+		width: 20%;
+		height: 4%;
+	}
+	
+	#touch {
+		top: 2%;
+	}
+
+	#sensor {
 		top: 8%;
-		z-index: 4;
 	}
 }
