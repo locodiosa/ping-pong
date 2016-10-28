@@ -472,8 +472,7 @@ function sensor() {
 }
 
 function touch() {
-	test = 2;
-	sensor();
+	window.removeEventListener('devicemotion', onMotionChange, true);
 }
 
 
