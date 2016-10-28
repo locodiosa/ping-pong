@@ -427,7 +427,7 @@ var test = 1;
 
 function sensor() {
 	if (test == 2) {
-			return;
+			break;
 		}
 	var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
