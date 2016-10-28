@@ -420,10 +420,10 @@ document.onkeydown = function(e) {
 window.addEventListener('devicemotion', onMotionChange, true);
 
 function onMotionChange(e) {
-	var ag = e.rotationRate;
+	var ag = e.accelerationIncludingGravity;
 
-	/*if (clientWidth > clientHeight) {
-		if (ag.x > ag.y + 1 && ag.x > ag.z + 1) { 
+	if (clientWidth > clientHeight) {
+		if (ag.x > ag.y && ag.x > ag.z) { 
 			moveDown();
 		}
 		if (ag.z > ag.x && ag.z > ag.y) { 
@@ -433,27 +433,7 @@ function onMotionChange(e) {
 		if (ag.y > ag.x && ag.y > ag.z) {
 			moveDown();
 		}
-
 		if(ag.z > ag.x && ag.z > ag.y) {
-    		moveUp();
-		}
-	}*/
-
-	
-
-	 if (clientWidth > clientHeight) {
-		if (ag.gamma > 0 && ag.alpha == 0 && ag.beta == 0) { 
-			moveDown();
-		}
-		if (ag.gamma < 0 && ag.alpha == 0 && ag.beta == 0) { 
-    		moveUp();
-		}
-	} else if (clientWidth < clientHeight) {
-		if (ag.beta > 0 && ag.alpha == 0 && ag.gamma == 0) {
-			moveDown();
-		}
-
-		if(ag.beta < 0 && ag.alpha == 0 && ag.gamma == 0) {
     		moveUp();
 		}
 	}
