@@ -100,7 +100,7 @@ body, html {
 }
 
 
-@media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) {
+@media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) and (max-device-width : 1024px) {
 	
 	.button {
 		display: table-cell;
@@ -108,7 +108,7 @@ body, html {
 		border-radius: 8px;
 		border: 2px groove #aaa;
 		width: 10%;
-		height: 10%;
+		height: 8%;
 		text-align: center;
 		font-weight: bold;
 		font-family: Arial;
@@ -120,13 +120,13 @@ body, html {
 	
 	#touch {
 		position: absolute;
-		top: 5%;
+		top: 4%;
 		z-index: 4
 	}
 
 	#sensor {
 		position: absolute;
-		top: 20%;
+		top: 15%;
 		z-index: 4
 	}
 }
