@@ -425,6 +425,9 @@ function onMotionChange(e) {
 	if (clientWidth > clientHeight) {
 		if (ag.x > ag.y && ag.x > ag.z) { 
 			moveDown();
+			if (ag.x < ag.y + 2) {
+				moveStop();
+			}
 		}
 		if (ag.z > ag.x && ag.z > ag.y) { 
     		moveUp();
