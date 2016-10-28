@@ -466,7 +466,7 @@ function sensor() {
 			}
 		}
 	} else if (test == 2) {
-		break;
+		return;
 	}
 }
 
