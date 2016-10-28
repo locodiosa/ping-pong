@@ -439,13 +439,13 @@ function onMotionChange(e) {
 	} else if (clientWidth < clientHeight) {
 		if (ag.y > ag.x && ag.y > ag.z) {
 			moveDown();
-			if (ag.y < ag.x + 5) {
+			if (ag.y < ag.z + 3) {
 				moveStop();
 			}
 		}
 		if(ag.z > ag.x && ag.z > ag.y) {
     		moveUp();
-    		if (ag.z < ag.x + 5) {
+    		if (ag.z < ag.y + 3) {
 				moveStop();
 			}
 		}
