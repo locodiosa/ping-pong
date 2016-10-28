@@ -100,7 +100,7 @@ body, html {
 }
 
 
-@media handheld and (screen) and (orientation: landscape) {
+@media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) {
 	
 	.button {
 		display: table-cell;
