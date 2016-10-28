@@ -423,52 +423,56 @@ document.onkeydown = function(e) {
 }
 
 //////////////////////////////управление наклоном телефона//////////////////////////////////
-
+var test = 1;
 
 function sensor() {
-	var stop = setInterval(sensor, 1); 
-	var insensitivityArea = 0.5; //ширина зоны нечувствительности
+	if (test == 2) {
+		return false;
+	} else {
+		var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
-	window.addEventListener('devicemotion', onMotionChange, true);
+		window.addEventListener('devicemotion', onMotionChange, true);
 
-	function onMotionChange(e) {
-		var ag = e.accelerationIncludingGravity;
+		function onMotionChange(e) {
+			var ag = e.accelerationIncludingGravity;
 
-		if (clientWidth > clientHeight) {
-			//альбомная ориентация экрана
-			if (ag.x > ag.y && ag.x > ag.z) { 
-				moveDown();
-				if (ag.x < ag.y + insensitivityArea) {
-					moveStop();
+			if (clientWidth > clientHeight) {
+				//альбомная ориентация экрана
+				if (ag.x > ag.y && ag.x > ag.z) { 
+					moveDown();
+					if (ag.x < ag.y + insensitivityArea) {
+						moveStop();
+					}
 				}
-			}
-			if (ag.z > ag.x && ag.z > ag.y) { 
-	    		moveUp();
-	    		if (ag.z < ag.x + insensitivityArea) {
-					moveStop();
+				if (ag.z > ag.x && ag.z > ag.y) { 
+		    		moveUp();
+		    		if (ag.z < ag.x + insensitivityArea) {
+						moveStop();
+					}
 				}
-			}
 
-		} else if (clientWidth < clientHeight) {
-			//портретная ориентация экрана
-			if (ag.y > ag.x && ag.y > ag.z) {
-				moveDown();
-				if (ag.y < ag.z + insensitivityArea) {
-					moveStop();
+			} else if (clientWidth < clientHeight) {
+				//портретная ориентация экрана
+				if (ag.y > ag.x && ag.y > ag.z) {
+					moveDown();
+					if (ag.y < ag.z + insensitivityArea) {
+						moveStop();
+					}
 				}
-			}
-			if (ag.z > ag.x && ag.z > ag.y) {
-	    		moveUp();
-	    		if (ag.z < ag.y + insensitivityArea) {
-					moveStop();
+				if (ag.z > ag.x && ag.z > ag.y) {
+		    		moveUp();
+		    		if (ag.z < ag.y + insensitivityArea) {
+						moveStop();
+					}
 				}
 			}
 		}
 	}
-} 
+}
 
 function touch() {
-	clearInterval(stop);
+	test = 2;
+	sensor();
 }
 
 
