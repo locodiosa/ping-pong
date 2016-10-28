@@ -423,9 +423,10 @@ document.onkeydown = function(e) {
 }
 
 //////////////////////////////управление наклоном телефона//////////////////////////////////
-var stop = setInterval(sensor, 1); 
+
 
 function sensor() {
+	var stop = setInterval(sensor, 1); 
 	var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
 	window.addEventListener('devicemotion', onMotionChange, true);
