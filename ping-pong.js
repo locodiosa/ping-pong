@@ -426,9 +426,7 @@ document.onkeydown = function(e) {
 var test = 1;
 
 function sensor() {
-	if (test == 2) {
-		break;
-	} else {
+	if (test == 1) {
 		var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
 		window.addEventListener('devicemotion', onMotionChange, true);
@@ -467,6 +465,8 @@ function sensor() {
 				}
 			}
 		}
+	} else if (test == 2) {
+		break;
 	}
 }
 
