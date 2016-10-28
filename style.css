@@ -98,3 +98,28 @@ body, html {
 	opacity: 0.7;
 	z-index: 1
 }
+
+@media screen and (orientation: landscape) {
+
+	#touch {
+		border: solid 1px #000;
+		position: absolute;
+		top: 20%;
+		font-size: 7vmin;
+		color: #333;
+		width: 10%;
+		height: 10%;
+		z-index: 4
+	}
+
+	#sensor {
+		border: solid 1px #000;
+		position: absolute;
+		top: 40%;
+		font-size: 7vmin;
+		color: #333;
+		width: 10%;
+		height: 10%;
+		z-index: 4
+	}
+}
