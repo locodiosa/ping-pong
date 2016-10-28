@@ -8,6 +8,11 @@ body, html {
 	padding:0px;
 	height: 100%;
 	width: 100%;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 #gameArea {
@@ -15,11 +20,6 @@ body, html {
 	left: 50%;
 	top: 50%;
 	background-color: #ccc;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
 }
 
 #scoreArea {
