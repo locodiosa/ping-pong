@@ -423,6 +423,7 @@ function onMotionChange(e) {
 	var ag = e.accelerationIncludingGravity;
 
 	if (clientWidth > clientHeight) {
+		//альбомная ориентация экрана
 		if (ag.x > ag.y && ag.x > ag.z) { 
 			moveDown();
 			if (ag.x < ag.y + 3) {
@@ -437,13 +438,14 @@ function onMotionChange(e) {
 		}
 
 	} else if (clientWidth < clientHeight) {
+		//портретная ориентация экрана
 		if (ag.y > ag.x && ag.y > ag.z) {
 			moveDown();
 			if (ag.y < ag.z + 3) {
 				moveStop();
 			}
 		}
-		if(ag.z > ag.x && ag.z > ag.y) {
+		if (ag.z > ag.x && ag.z > ag.y) {
     		moveUp();
     		if (ag.z < ag.y + 3) {
 				moveStop();
