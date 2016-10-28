@@ -422,7 +422,10 @@ document.onkeydown = function(e) {
 	} 
 }
 
-//управление наклоном телефона
+//////////////////////////////управление наклоном телефона//////////////////////////////////
+
+var insensitivityArea = 2; //ширина зоны нечувствительности
+
 window.addEventListener('devicemotion', onMotionChange, true);
 
 function onMotionChange(e) {
@@ -432,13 +435,13 @@ function onMotionChange(e) {
 		//альбомная ориентация экрана
 		if (ag.x > ag.y && ag.x > ag.z) { 
 			moveDown();
-			if (ag.x < ag.y + 3) {
+			if (ag.x < ag.y + insensitivityArea) {
 				moveStop();
 			}
 		}
 		if (ag.z > ag.x && ag.z > ag.y) { 
     		moveUp();
-    		if (ag.z < ag.x + 3) {
+    		if (ag.z < ag.x + insensitivityArea) {
 				moveStop();
 			}
 		}
@@ -447,13 +450,13 @@ function onMotionChange(e) {
 		//портретная ориентация экрана
 		if (ag.y > ag.x && ag.y > ag.z) {
 			moveDown();
-			if (ag.y < ag.z + 3) {
+			if (ag.y < ag.z + insensitivityArea) {
 				moveStop();
 			}
 		}
 		if (ag.z > ag.x && ag.z > ag.y) {
     		moveUp();
-    		if (ag.z < ag.y + 3) {
+    		if (ag.z < ag.y + insensitivityArea) {
 				moveStop();
 			}
 		}
