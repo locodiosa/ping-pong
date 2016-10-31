@@ -424,39 +424,38 @@ document.onkeydown = function(e) {
 
 //////////////////////////////управление наклоном телефона//////////////////////////////////
 function sensor() {
-	var insensitivityArea = 0.5; //ширина зоны нечувствительности
-	window.addEventListener('deviceorintation', onOrintationChange, true);
+	window.addEventListener('deviceorientation', onOrientationChange, true);
 }
 
-function onOrintationChange(event) {
-	var motion = event.axis;
+function onOrientationChange(event) {
+	var insensitivityArea = 0.5; //ширина зоны нечувствительности
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if (motion.gamma > motion.alpha && motion.gamma > motion.betta) { 
+		if (event.gamma > 0 ) { 
 			moveDown();
-			if (motion.gamma < motion.betta + insensitivityArea) {
+			if (event.gamma < insensitivityArea) {
 				moveStop();
 			}
 		}
-		if (motion.alpha > motion.betta && motion.alpha > motion.gamma) { 
+		if (event.gamma < 0) { 
     		moveUp();
-    		if (motion.alpha < motion.gamma + insensitivityArea) {
+    		if (event.gamma > insensitivityArea) {
 				moveStop();
 			}
 		}
 
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
-		if (motion.betta > motion.gamma && motion.betta > motion.alpha) {
+		if (event.beta > 0) {
 			moveDown();
-			if (motion.betta < motion.alpha + insensitivityArea) {
+			if (event.beta < insensitivityArea) {
 				moveStop();
 			}
 		}
-		if (motion.alpha > motion.betta && motion.alpha > motion.gamma) {
+		if (event.beta < 0) {
     		moveUp();
-    		if (motion.alpha < ag.betta + insensitivityArea) {
+    		if (event.beta > insensitivityArea) {
 				moveStop();
 			}
 		}
@@ -464,7 +463,7 @@ function onOrintationChange(event) {
 }
 
 function touch() {
-	window.removeEventListener('devicemotion', onMotionChange, true);
+	window.removeEventListener('deviceorientation', onOrientationChange, true);
 }
 
 
