@@ -432,13 +432,13 @@ function onOrientationChange(event) {
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if (event.gamma > insensitivityArea) { 
+		if (event.gamma < - 45 && event.gamma > - 90) { 
 			moveDown();
 			/*if (event.gamma < insensitivityArea) {
 				moveStop();
 			}*/
 		}
-		if (event.gamma < - insensitivityArea) { 
+		if (event.gamma > - 45 && event.gamma < 0) { 
     		moveUp();
     		/*if (event.gamma > - insensitivityArea) {
 				moveStop();
