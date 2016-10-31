@@ -432,32 +432,26 @@ function onOrientationChange(event) {
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if (event.gamma < - 45 && event.gamma > - 90) { 
+		if (event.gamma < - 50 && event.gamma > - 90) { 
 			moveDown();
-			/*if (event.gamma < insensitivityArea) {
-				moveStop();
-			}*/
 		}
-		if (event.gamma > - 45 && event.gamma < 0) { 
+		if (event.gamma > - 40 && event.gamma < 0) { 
     		moveUp();
-    		/*if (event.gamma > - insensitivityArea) {
-				moveStop();
-			}*/
+    	}
+    	if (event.gamma > - 50 && event.gamma < - 40) {
+			moveStop();
 		}
 
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
-		if (event.beta > 0) {
+		if (event.beta > 50) {
 			moveDown();
-			if (event.beta < insensitivityArea) {
-				moveStop();
-			}
 		}
-		if (event.beta < 0) {
+		if (event.beta < 40) {
     		moveUp();
-    		if (event.beta > - insensitivityArea) {
-				moveStop();
-			}
+    	}
+    	if (event.beta > 40 && event.beta < 50) {
+			moveStop();
 		}
 	}
 }
