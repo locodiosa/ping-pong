@@ -425,38 +425,38 @@ document.onkeydown = function(e) {
 //////////////////////////////управление наклоном телефона//////////////////////////////////
 function sensor() {
 	var insensitivityArea = 0.5; //ширина зоны нечувствительности
-	window.addEventListener('devicemotion', onMotionChange, true);
+	window.addEventListener('deviceorintation', onOrintationChange, true);
 }
 
-function onMotionChange(e) {
-	var ag = e.accelerationIncludingGravity;
+function onOrintationChange(event) {
+	var motion = event.axis;
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if (ag.x > ag.y && ag.x > ag.z) { 
+		if (motion.gamma > motion.alpha && motion.gamma > motion.betta) { 
 			moveDown();
-			if (ag.x < ag.y + insensitivityArea) {
+			if (motion.gamma < motion.betta + insensitivityArea) {
 				moveStop();
 			}
 		}
-		if (ag.z > ag.x && ag.z > ag.y) { 
+		if (motion.alpha > motion.betta && motion.alpha > motion.gamma) { 
     		moveUp();
-    		if (ag.z < ag.x + insensitivityArea) {
+    		if (motion.alpha < motion.gamma + insensitivityArea) {
 				moveStop();
 			}
 		}
 
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
-		if (ag.y > ag.x && ag.y > ag.z) {
+		if (motion.betta > motion.gamma && motion.betta > motion.alpha) {
 			moveDown();
-			if (ag.y < ag.z + insensitivityArea) {
+			if (motion.betta < motion.alpha + insensitivityArea) {
 				moveStop();
 			}
 		}
-		if (ag.z > ag.x && ag.z > ag.y) {
+		if (motion.alpha > motion.betta && motion.alpha > motion.gamma) {
     		moveUp();
-    		if (ag.z < ag.y + insensitivityArea) {
+    		if (motion.alpha < ag.betta + insensitivityArea) {
 				moveStop();
 			}
 		}
