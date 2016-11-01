@@ -143,6 +143,10 @@ body, html {
 	#sensor {
 		top: 16%;
 	}
+
+	#calibration {
+		top: 28%;
+	}
 }
 
 @media screen and (orientation: portrait) and (max-device-width: 1024px)  {
@@ -157,5 +161,9 @@ body, html {
 
 	#sensor {
 		top: 8%;
+	}
+
+	#calibration {
+		top: 14%;
 	}
 }

@@ -24,6 +24,8 @@ var gameState = 0;
 var startPauseTime = 0;
 var dt = 1;
 var numberBallBounce = 0;
+var userGamma = 0;
+var userBeta = 0;
 
 
 /////////////////////////////////////////Объекты/////////////////////////////////////////
@@ -429,8 +431,6 @@ function sensor() {
 
 function onOrientationChange(event) {
 	var insensitivityArea = 5; //ширина зоны нечувствительности
-	var userGamma = 0;
-	var userBeta = 0;
 	var maxAngle = 90;
 
 	if (clientWidth > clientHeight) {
@@ -461,6 +461,15 @@ function onOrientationChange(event) {
 
 function touch() {
 	window.removeEventListener('deviceorientation', onOrientationChange, true);
+}
+
+function calibration() {
+	window.addEventListener('deviceorientation', userCalibration, true);
+}
+
+function userCalibration(event) {
+	userGamma = event.gamma;
+	userBeta = event.beta;
 }
 
 
