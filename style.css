@@ -117,14 +117,6 @@ body, html {
 		font-size: 1em;
 		color: #333;
 		cursor: pointer;
-	}
-	
-	#touch {
-		position: absolute;
-		z-index: 4
-	}
-
-	#sensor {
 		position: absolute;
 		z-index: 4
 	}
