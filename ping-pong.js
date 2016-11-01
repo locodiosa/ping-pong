@@ -428,29 +428,32 @@ function sensor() {
 }
 
 function onOrientationChange(event) {
-	var insensitivityArea = 20; //ширина зоны нечувствительности
+	var insensitivityArea = 5; //ширина зоны нечувствительности
+	var userGamma = 0;
+	var userBeta = 0;
+	var maxAngle = 90;
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if (event.gamma < - 50 && event.gamma > - 90) { 
+		if (event.gamma < userGamma - maxAngle / 2 - insensitivityArea && event.gamma > userGamma - maxAngle) { 
 			moveDown();
 		}
-		if (event.gamma > - 40 && event.gamma < 0) { 
+		if (event.gamma > userGamma - maxAngle / 2 + insensitivityArea && event.gamma < userGamma) { 
     		moveUp();
     	}
-    	if (event.gamma > - 50 && event.gamma < - 40) {
+    	if (event.gamma > userGamma - maxAngle / 2 - insensitivityArea && event.gamma < userGamma - maxAngle / 2 + insensitivityArea) {
 			moveStop();
 		}
 
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
-		if (event.beta > 50) {
+		if (event.beta > userBeta + maxAngle / 2 + insensitivityArea) {
 			moveDown();
 		}
-		if (event.beta < 40) {
+		if (event.beta < userBeta + maxAngle / 2 - insensitivityArea) {
     		moveUp();
     	}
-    	if (event.beta > 40 && event.beta < 50) {
+    	if (event.beta > userBeta + maxAngle / 2 - insensitivityArea && event.beta < userBeta + maxAngle / 2 + insensitivityArea) {
 			moveStop();
 		}
 	}
