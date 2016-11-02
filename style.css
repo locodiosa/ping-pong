@@ -124,7 +124,6 @@ body, html {
 
 @media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) and (max-device-width: 1024px)  {
 	.button {
-		width: 10%;
 		height: 9%;
 	}
 	
@@ -133,17 +132,18 @@ body, html {
 	}
 
 	#sensor {
-		top: 16%;
+		top: 4%;
+		left: 10%;
 	}
 
 	#calibration {
-		top: 28%;
+		top: 4%;
+		right: 0;
 	}
 }
 
 @media screen and (orientation: portrait) and (max-device-width: 1024px)  {
 	.button {
-		width: 20%;
 		height: 4%;
 	}
 	
@@ -152,10 +152,12 @@ body, html {
 	}
 
 	#sensor {
-		top: 8%;
+		top: 2%;
+		left: 10%;
 	}
 
 	#calibration {
-		top: 14%;
+		top: 2%;
+		right: 0;
 	}
 }
