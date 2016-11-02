@@ -469,8 +469,6 @@ function calibration() {
 function userCalibration(event) {
 	userGamma = event.gamma;
 	userBeta = event.beta;
-	document.getElementById("gamma").innerHTML = "" + userGamma + "";
-	document.getElementById("beta").innerHTML = "" + userBeta + "";
 	window.removeEventListener('deviceorientation', userCalibration, true);
 }
 

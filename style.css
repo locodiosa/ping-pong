@@ -139,14 +139,6 @@ body, html {
 	#calibration {
 		top: 28%;
 	}
-
-	#gamma {
-		top: 40%;
-	}
-
-	#beta {
-		top: 52%;
-	}
 }
 
 @media screen and (orientation: portrait) and (max-device-width: 1024px)  {
@@ -166,14 +158,4 @@ body, html {
 	#calibration {
 		top: 14%;
 	}
-
-	#gamma {
-		top: 20%;
-	}
-
-	#beta {
-		top: 20%;
-		left: 30%;
-	}
-
 }
