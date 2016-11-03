@@ -427,6 +427,7 @@ document.onkeydown = function(e) {
 //////////////////////////////управление наклоном телефона//////////////////////////////////
 function sensor() {
 	window.addEventListener('deviceorientation', onOrientationChange, true);
+	calibration();
 }
 
 function onOrientationChange(event) {
