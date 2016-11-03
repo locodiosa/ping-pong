@@ -498,4 +498,9 @@ function userCalibration(event) {
 }
 
 
+///////////////////////////Запрет выключения экрана телефона/////////////////////////////
+
+navigator.wakeLock.request("screen"); 
+
+
 
