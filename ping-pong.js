@@ -446,12 +446,32 @@ function onOrientationChange(event) {
 
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
-		if (event.beta > userBeta + insensitivityArea) {
-			moveDown();
-		}
-		if (event.beta < userBeta - insensitivityArea) {
-    		moveUp();
-    	}
+		if (userBeta >= 0) {
+			if (event.beta > userBeta + insensitivityArea && event.beta >= 0) {
+				moveDown();
+			}
+			if (event.beta < userBeta - insensitivityArea && event.beta >= 0) {
+	    		moveUp();
+	    	}
+	    	
+	    	if (event.beta < userBeta - insensitivityArea && event.beta < 0) {
+	    		moveDown();
+	    	}
+	    }
+
+	    if (userBeta < 0) {
+			if (event.beta > userBeta + insensitivityArea && event.beta < 0) {
+				moveDown();
+			}
+			if (event.beta < userBeta - insensitivityArea && event.beta < 0) {
+	    		moveUp();
+	    	}
+	    	
+	    	if (event.beta > userBeta - insensitivityArea && event.beta > 0) {
+	    		moveUp();
+	    	}
+	    }
+
     	if (event.beta > userBeta - insensitivityArea && event.beta < userBeta + insensitivityArea) {
 			moveStop();
 		}
