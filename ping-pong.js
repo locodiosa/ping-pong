@@ -200,6 +200,10 @@ function checkGameState() {
 		if (ball.x > 0.5) {
 			moveRacket1();
 			draw();
+		} else if (ball.x < 0.5) {
+			moveRacket1();
+			ball.y = racket1.y;
+			draw();
 		}
 				
 		if (pauseTime >= startPauseTime + 2) {
