@@ -308,7 +308,7 @@ function bounceRacket(racket) {
 	var nextNumberBallBounce = numberBallBounce + 1;
 	numberBallBounce = nextNumberBallBounce;
 
-	if (numberBallBounce <= 10) {
+	if (numberBallBounce <= 20) {
 		var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.05;
 	} else {
 		ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
