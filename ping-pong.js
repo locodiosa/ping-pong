@@ -23,7 +23,8 @@ var startSystemTime = Date.now() / 1000;
 var gameState = 0;
 var startPauseTime = 0;
 var dt = 1;
-var numberBallBounce = 0;
+var userGamma = 0;
+var userBeta = 0;
 
 
 /////////////////////////////////////////Объекты/////////////////////////////////////////
@@ -198,6 +199,10 @@ function checkGameState() {
 		if (ball.x > 0.5) {
 			moveRacket1();
 			draw();
+		} else if (ball.x < 0.5) {
+			moveRacket1();
+			ball.y = racket1.y;
+			draw();
 		}
 				
 		if (pauseTime >= startPauseTime + 2) {
@@ -302,16 +307,7 @@ function moveRacket1() {
 function bounceRacket(racket) {
 	//расчет угла отскока мяча от ракетки
 	var side = (ball.y - racket.y) / (racket.length / 2);
-
-	var nextNumberBallBounce = numberBallBounce + 1;
-	numberBallBounce = nextNumberBallBounce;
-
-	if (numberBallBounce <= 10) {
-		var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.05;
-	} else {
-		ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
-	}
-	
+	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.04;
 	var alpha = Math.asin(ball.speedY / ballSpeed);
 	alpha += side * Math.PI / 6;
 	var maxAlpha = Math.PI * 0.4; 
@@ -424,48 +420,77 @@ document.onkeydown = function(e) {
 
 //////////////////////////////управление наклоном телефона//////////////////////////////////
 function sensor() {
-	var insensitivityArea = 0.5; //ширина зоны нечувствительности
-	window.addEventListener('devicemotion', onMotionChange, true);
+	window.addEventListener('deviceorientation', onOrientationChange, true);
+	calibration();
 }
 
-function onMotionChange(e) {
-	var ag = e.accelerationIncludingGravity;
+function onOrientationChange(event) {
+	var insensitivityArea = 5; //ширина зоны нечувствительности
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if (ag.x > ag.y && ag.x > ag.z) { 
+		if (event.gamma < userGamma + insensitivityArea) { 
 			moveDown();
-			if (ag.x < ag.y + insensitivityArea) {
-				moveStop();
-			}
 		}
-		if (ag.z > ag.x && ag.z > ag.y) { 
+		if (event.gamma > userGamma - insensitivityArea) { 
     		moveUp();
-    		if (ag.z < ag.x + insensitivityArea) {
-				moveStop();
-			}
+    	}
+    	if (event.gamma < userGamma + insensitivityArea && event.gamma > userGamma - insensitivityArea) {
+			moveStop();
 		}
 
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
-		if (ag.y > ag.x && ag.y > ag.z) {
-			moveDown();
-			if (ag.y < ag.z + insensitivityArea) {
-				moveStop();
+		if (userBeta >= 0) {
+			if (event.beta > userBeta + insensitivityArea && event.beta >= 0) {
+				moveDown();
 			}
-		}
-		if (ag.z > ag.x && ag.z > ag.y) {
-    		moveUp();
-    		if (ag.z < ag.y + insensitivityArea) {
-				moveStop();
+			if (event.beta < userBeta - insensitivityArea && event.beta >= 0) {
+	    		moveUp();
+	    	}
+	    	
+	    	if (event.beta < userBeta - insensitivityArea && event.beta < 0) {
+	    		moveDown();
+	    	}
+	    }
+
+	    if (userBeta < 0) {
+			if (event.beta > userBeta + insensitivityArea && event.beta < 0) {
+				moveDown();
 			}
+			if (event.beta < userBeta - insensitivityArea && event.beta < 0) {
+	    		moveUp();
+	    	}
+	    	
+	    	if (event.beta > userBeta - insensitivityArea && event.beta > 0) {
+	    		moveUp();
+	    	}
+	    }
+
+    	if (event.beta > userBeta - insensitivityArea && event.beta < userBeta + insensitivityArea) {
+			moveStop();
 		}
 	}
 }
 
 function touch() {
-	window.removeEventListener('devicemotion', onMotionChange, true);
+	window.removeEventListener('deviceorientation', onOrientationChange, true);
 }
+
+function calibration() {
+	window.addEventListener('deviceorientation', userCalibration, true);
+}
+
+function userCalibration(event) {
+	userGamma = event.gamma;
+	userBeta = event.beta;
+	window.removeEventListener('deviceorientation', userCalibration, true);
+}
+
+
+///////////////////////////Запрет выключения экрана телефона/////////////////////////////
+
+navigator.wakeLock.request("screen"); 
 
 
 
