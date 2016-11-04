@@ -23,7 +23,6 @@ var startSystemTime = Date.now() / 1000;
 var gameState = 0;
 var startPauseTime = 0;
 var dt = 1;
-var numberBallBounce = 0;
 var userGamma = 0;
 var userBeta = 0;
 
@@ -308,16 +307,7 @@ function moveRacket1() {
 function bounceRacket(racket) {
 	//расчет угла отскока мяча от ракетки
 	var side = (ball.y - racket.y) / (racket.length / 2);
-
-	var nextNumberBallBounce = numberBallBounce + 1;
-	numberBallBounce = nextNumberBallBounce;
-
-	if (numberBallBounce <= 20) {
-		var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.05;
-	} else {
-		ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY);
-	}
-	
+	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.04;
 	var alpha = Math.asin(ball.speedY / ballSpeed);
 	alpha += side * Math.PI / 6;
 	var maxAlpha = Math.PI * 0.4; 
