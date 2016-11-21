@@ -40,7 +40,7 @@ var wallUpper = {
 	bounce: function(ball) {
 		if ((ball.y <= this.width + ball.radius) && (ball.speedY < 0)) {
 			ball.speedY = -ball.speedY;
-			sounds("wall");
+			sounds("wall.mp3");
 		}
 	}
 };
@@ -56,7 +56,7 @@ var wallBottom = {
 	bounce: function(ball) {
 		if ((ball.y >= heightCoef - this.width - ball.radius) && (ball.speedY > 0)) {
 			ball.speedY = -ball.speedY;
-			sounds("wall");
+			sounds("wall.mp3");
 		}
 	}
 };
@@ -83,7 +83,7 @@ var wallLeft = {
 			};
 			
 			scoreComputer += 1;
-			sounds("out");
+			sounds("out.mp3");
 		}
 	}
 };
@@ -110,7 +110,7 @@ var wallRight = {
 			};
 
 			scorePlayer += 1;
-			sounds("out");
+			sounds("out.mp3");
 		}
 	}
 };
@@ -147,7 +147,7 @@ var racket1 = {
 			(ball.y <= this.y + this.length / 2 + ball.radius) &&
 			(ball.speedX < 0)) {
 				bounceRacket(this);
-				sounds("racket1");
+				sounds("racket1.mp3");
 		}
 	}
 };
@@ -170,7 +170,7 @@ var racket2 = {
 			(ball.y <= this.y + this.length / 2 + ball.radius) &&
 			(ball.speedX > 0)) {
 				bounceRacket(this);
-				sounds("racket2");
+				sounds("racket2.mp3");
 		}
 		
 		if (ball.speedX < 0) {
@@ -496,12 +496,49 @@ function userCalibration(event) {
 
 ///////////////////////////////////////Звуки////////////////////////////////////////////
 
-function sounds(soundName){
+/*function sounds(soundName){
   var audio = new Audio();
   audio.preload = 'auto';
   audio.src = "sounds/" + soundName + ".mp3";
   audio.play();
+}*/
+
+function sounds(soundName) {
+	var audioPlayer = new AudioPlayer();
+	audioPlayer.play("http://locodiosa.github.io/ping-pong/sounds/" + soundName +  ".mp3");
 }
+
+var AudioPlayer = function() {
+	var audioContext = null;
+	var audios = [];
+
+	var getContext = function() {
+		if (audioContext === null) {
+			audioContext = new (window.AudioContext || window.webkitAudioContext)();
+		}
+
+		return audioContext;
+	}
+
+	this.play = function(url) {
+		if (audios[url] === undefined) {
+			var context = getContext();
+
+			var audio = new Audio();
+			audio.src = url;
+			audio.crossOrigin = "anonymous";
+			audio.preload = "auto";
+
+			var source = context.createMediaElementSource(audio);
+			source.connect(context.destination);
+
+			audios[url] = audio;		
+		}
+
+		audios[url].play();
+	}
+}
+
 
 
 ///////////////////////////Запрет выключения экрана телефона/////////////////////////////
