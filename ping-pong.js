@@ -40,7 +40,7 @@ var wallUpper = {
 	bounce: function(ball) {
 		if ((ball.y <= this.width + ball.radius) && (ball.speedY < 0)) {
 			ball.speedY = -ball.speedY;
-			sounds("wall.mp3");
+			sounds("wall");
 		}
 	}
 };
@@ -56,7 +56,7 @@ var wallBottom = {
 	bounce: function(ball) {
 		if ((ball.y >= heightCoef - this.width - ball.radius) && (ball.speedY > 0)) {
 			ball.speedY = -ball.speedY;
-			sounds("wall.mp3");
+			sounds("wall");
 		}
 	}
 };
@@ -83,7 +83,7 @@ var wallLeft = {
 			};
 			
 			scoreComputer += 1;
-			sounds("out.mp3");
+			sounds("out");
 		}
 	}
 };
@@ -110,7 +110,7 @@ var wallRight = {
 			};
 
 			scorePlayer += 1;
-			sounds("out.mp3");
+			sounds("out");
 		}
 	}
 };
@@ -147,7 +147,7 @@ var racket1 = {
 			(ball.y <= this.y + this.length / 2 + ball.radius) &&
 			(ball.speedX < 0)) {
 				bounceRacket(this);
-				sounds("racket1.mp3");
+				sounds("racket1");
 		}
 	}
 };
@@ -170,7 +170,7 @@ var racket2 = {
 			(ball.y <= this.y + this.length / 2 + ball.radius) &&
 			(ball.speedX > 0)) {
 				bounceRacket(this);
-				sounds("racket2.mp3");
+				sounds("racket2");
 		}
 		
 		if (ball.speedX < 0) {
@@ -503,10 +503,23 @@ function userCalibration(event) {
   audio.play();
 }*/
 
+
+function initAudioPlayer() {
+	var audioPlayer = null;
+
+	if (audioPlayer === null) {
+		audioPlayer = new AudioPlayer();
+	}
+
+	return audioPlayer;	
+}
+
+
 function sounds(soundName) {
-	var audioPlayer = new AudioPlayer();
+	var audioPlayer = initAudioPlayer();
 	audioPlayer.play("http://locodiosa.github.io/ping-pong/sounds/" + soundName +  ".mp3");
 }
+
 
 var AudioPlayer = function() {
 	var audioContext = null;
