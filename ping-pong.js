@@ -1,13 +1,31 @@
 "use strict";
 
 var canvas = null;
+var frameCounter = 0;
+var startSystemTime = Date.now() / 1000;
+var gameState = 0;
+var startPauseTime = 0;
+var dt = 1;
+
+var scorePlayer = 0;
+var scoreComputer = 0;
+var userGamma = 0;
+var userBeta = 0;
+
+/////////////////////////////////////Основной цикл//////////////////////////////
+var mainloop = function() {
+	checkGameState();	
+	countFrames();
+}
+
+//////////////////////////////////Пропорции игрового поля////////////////////////////
 
 var clientWidth = document.documentElement.clientWidth;
 var clientHeight = document.documentElement.clientHeight;
+
 var scale = clientWidth * 0.95;
 
 if (clientWidth >= clientHeight * 1.3) {
-	clientHeight = clientHeight;
 	scale = clientHeight * 1.3;
 };
 
@@ -16,18 +34,7 @@ var heightCoef = 0.7
 var boardWidth = 1;
 var boardHeight = heightCoef;
 
-var scorePlayer = 0;
-var scoreComputer = 0;
-var frameCounter = 0;
-var startSystemTime = Date.now() / 1000;
-var gameState = 0;
-var startPauseTime = 0;
-var dt = 1;
-var userGamma = 0;
-var userBeta = 0;
-
-
-/////////////////////////////////////////Объекты/////////////////////////////////////////
+/////////////////////////////////////////Объекты///////////////////////////////////////
 
 var wallUpper = {
 	length: 1,
@@ -187,14 +194,7 @@ var racket2 = {
 
 var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, ball];
 
-
-/////////////////////////////////////Основной цикл//////////////////////////////
-var mainloop = function() {
-	checkGameState();	
-	countFrames();
-}
-////////////////////////////////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////////////////////////////////
 
 function checkGameState() {
 	if (gameState == 0) {
@@ -221,25 +221,23 @@ function checkGameState() {
 	}
 }
 
-function initCanvas() {
-	canvas = document.getElementById("canvas");
-	canvas.width  = 1 * scale; 
-	canvas.height = 0.7 * scale;
+function countFrames() {
+	//частота кадров
+	frameCounter += 1;
+	var currentSystemTime = Date.now() / 1000;
+	
+	if (currentSystemTime - startSystemTime >= 1) {
+		startSystemTime = currentSystemTime; 
+		frameCounter = 0;
+	}
 }
 
-function initAreas() {
-	//области отрисовки и нажатия
-	var gameArea = document.getElementById('gameArea');
-	gameArea.style.width = (canvas.width) + 'px';
-	gameArea.style.height = (canvas.height) + 'px' ;
-	gameArea.style.marginTop = (-canvas.height / 2) + 'px';
-	gameArea.style.marginLeft = (-canvas.width / 2) + 'px';
-	var upArea = document.getElementById('up');
-	upArea.style.width = (document.documentElement.clientWidth) + 'px';
-	upArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
-	var downArea = document.getElementById('down');
-	downArea.style.width = (document.documentElement.clientWidth) + 'px';
-	downArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
+//////////////////////////////////////////////////////////////////////////////////////
+
+function calc() {
+	moveBall();	
+	moveRacket1();
+	moveRacket2();
 }
 
 function draw() {
@@ -249,22 +247,7 @@ function draw() {
 	drawObjects(context);
 }
 
-function drawObjects(context) {
-	context.fillStyle = '#333';
-	context.beginPath();
-	objects.forEach(function(o) {
-		o.draw(context);
-	});
-	context.closePath();
-	context.fill();	
-}
-
-
-function calc() {
-	moveBall();	
-	moveRacket1();
-	moveRacket2();
-}
+///////////////////////////////////////////////////////////////////////////////////////
 
 function moveBall() {
 //движение мяча
@@ -309,9 +292,42 @@ function moveRacket1() {
 	} 
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
 
+function initCanvas() {
+	canvas = document.getElementById("canvas");
+	canvas.width  = boardWidth * scale; 
+	canvas.height = boardHeight * scale;
+}
+
+function initAreas() {
+	//области отрисовки и нажатия
+	var gameArea = document.getElementById('gameArea');
+	gameArea.style.width = (canvas.width) + 'px';
+	gameArea.style.height = (canvas.height) + 'px' ;
+	gameArea.style.marginTop = (-canvas.height / 2) + 'px';
+	gameArea.style.marginLeft = (-canvas.width / 2) + 'px';
+	var upArea = document.getElementById('up');
+	upArea.style.width = (document.documentElement.clientWidth) + 'px';
+	upArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
+	var downArea = document.getElementById('down');
+	downArea.style.width = (document.documentElement.clientWidth) + 'px';
+	downArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
+}
+
+function drawObjects(context) {
+	context.fillStyle = '#333';
+	context.beginPath();
+	objects.forEach(function(o) {
+		o.draw(context);
+	});
+	context.closePath();
+	context.fill();	
+}
+
+/////////////////////////////Расчет угла отскока мяча от ракетки////////////////////////////
 function bounceRacket(racket) {
-	//расчет угла отскока мяча от ракетки
+	//
 	var side = (ball.y - racket.y) / (racket.length / 2);
 	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.04;
 	var alpha = Math.asin(ball.speedY / ballSpeed);
@@ -324,8 +340,7 @@ function bounceRacket(racket) {
 				(ball.speedX >= 0 ? -1 : 1);
 }
 
-
-///////////////////////////Движение ракетки игрока/////////////////////////////////////////
+/////////////////////////////Движение ракетки игрока////////////////////////////////////////
 
 function move(event) {
 	//перемещение ракетки игрока стрелками
@@ -369,16 +384,7 @@ function countScore(idName, gamer) {
 	}
 }
 
-function countFrames() {
-	//частота кадров
-	frameCounter += 1;
-	var currentSystemTime = Date.now() / 1000;
-	
-	if (currentSystemTime - startSystemTime >= 1) {
-		startSystemTime = currentSystemTime; 
-		frameCounter = 0;
-	}
-}
+
 
 function resize() {
 	//изменение масштаба отрисовки
@@ -391,6 +397,8 @@ function resize() {
 		scale = clientHeight * 1.3;
 	};
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 var animFrame = window.requestAnimationFrame ||
 				window.webkitRequestAnimationFrame ||
@@ -413,17 +421,6 @@ if (animFrame !== null) {
 }
 
 
-//запрет прокрутки страницы
-document.onmousewheel = document.onwheel = function() { 
-	return false;
-};
-document.addEventListener("MozMousePixelScroll", function() {return false}, false);
-document.onkeydown = function(e) {
-	if ((e.keyCode >= 33) && (e.keyCode <=40)) {
-		return false;
-	} 
-}
-
 //////////////////////////////управление наклоном телефона//////////////////////////////////
 function sensor() {
 	window.addEventListener('deviceorientation', onOrientationChange, true);
@@ -436,23 +433,23 @@ function onOrientationChange(event) {
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
 		if ((userGamma < 0 && event.gamma < 0) || (userGamma > 0 && event.gamma > 0)) {
-			if (event.gamma < 0) {
-				if (event.gamma < userGamma - insensitivityArea) { 
+			
+			if (event.gamma < userGamma - insensitivityArea) { 
 				moveDown();
-				}
-				if (event.gamma > userGamma + insensitivityArea) { 
-		    		moveUp();
-		    	}
-		    	if (event.gamma < userGamma + insensitivityArea && event.gamma > userGamma - insensitivityArea) {
-					moveStop();
-				}
+			}
+			if (event.gamma > userGamma + insensitivityArea) { 
+	    		moveUp();
+	    	}
+	    	if (event.gamma < userGamma + insensitivityArea && event.gamma > userGamma - insensitivityArea) {
+				moveStop();
+			}
 
-			} else if ((userGamma < 0 && event.gamma > 50) || (userGamma > 0 && event.gamma < 0 && event.gamma > -50)) {
+		} else if ((userGamma < 0 && event.gamma > 50) || (userGamma > 0 && event.gamma < 0 && event.gamma > -50)) {
 				moveDown();
 
-			} else if ((userGamma < 0 && event.gamma > 0 && event.gamma < 50) || (userGamma > 0 && event.gamma < 0 && event.gamma < -50)) {
+		} else if ((userGamma < 0 && event.gamma > 0 && event.gamma < 50) || (userGamma > 0 && event.gamma < 0 && event.gamma < -50)) {
 				moveUp();
-			}	
+		}	
 
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
@@ -510,6 +507,18 @@ function sounds(soundName){
   audio.preload = 'auto';
   audio.src = "sounds/" + soundName + ".mp3";
   audio.play();
+}
+
+///////////////////////////////запрет прокрутки страницы////////////////////////////////////
+
+document.onmousewheel = document.onwheel = function() { 
+	return false;
+};
+document.addEventListener("MozMousePixelScroll", function() {return false}, false);
+document.onkeydown = function(e) {
+	if ((e.keyCode >= 33) && (e.keyCode <=40)) {
+		return false;
+	} 
 }
 
 
