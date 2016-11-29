@@ -496,62 +496,12 @@ function userCalibration(event) {
 
 ///////////////////////////////////////Звуки////////////////////////////////////////////
 
-/*function sounds(soundName){
+function sounds(soundName){
   var audio = new Audio();
   audio.preload = 'auto';
   audio.src = "sounds/" + soundName + ".mp3";
   audio.play();
-}*/
-
-
-function initAudioPlayer() {
-	var audioPlayer = null;
-
-	if (audioPlayer === null) {
-		audioPlayer = new AudioPlayer();
-	}
-
-	return audioPlayer;	
 }
-
-
-function sounds(soundName) {
-	var audioPlayer = initAudioPlayer();
-	audioPlayer.play("http://locodiosa.github.io/ping-pong/sounds/" + soundName +  ".mp3");
-}
-
-
-var AudioPlayer = function() {
-	var audioContext = null;
-	var audios = [];
-
-	var getContext = function() {
-		if (audioContext === null) {
-			audioContext = new (window.AudioContext || window.webkitAudioContext)();
-		}
-
-		return audioContext;
-	}
-
-	this.play = function(url) {
-		if (audios[url] === undefined) {
-			var context = getContext();
-
-			var audio = new Audio();
-			audio.src = url;
-			audio.crossOrigin = "anonymous";
-			audio.preload = "auto";
-
-			var source = context.createMediaElementSource(audio);
-			source.connect(context.destination);
-
-			audios[url] = audio;		
-		}
-
-		audios[url].play();
-	}
-}
-
 
 
 ///////////////////////////Запрет выключения экрана телефона/////////////////////////////
