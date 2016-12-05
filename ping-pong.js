@@ -427,8 +427,14 @@ function sensor() {
 	calibration();
 }
 
+function changeInsensitivityArea() {
+	var size = document.getElementById("size").value;
+	var insensitivityArea = parseInt(size);
+	return insensitivityArea;
+}
+
 function onOrientationChange(event) {
-	var insensitivityArea = 5; //ширина зоны нечувствительности
+	var insensitivityArea = changeInsensitivityArea(); //ширина зоны нечувствительности
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
