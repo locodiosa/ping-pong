@@ -140,6 +140,11 @@ body, html {
 		top: 4%;
 		right: 0;
 	}
+
+	#size {
+		top: 20%;
+		right: 0;	
+	}
 }
 
 @media screen and (orientation: portrait) and (max-device-width: 1024px)  {
@@ -159,5 +164,10 @@ body, html {
 	#calibration {
 		top: 2%;
 		right: 0;
+	}
+
+	#size {
+		top: 10%;
+		right: 0;	
 	}
 }

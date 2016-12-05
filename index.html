@@ -6,13 +6,12 @@
 	<title>ping-pong</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script defer src="ping-pong.js"></script>
-	<script language="javascript" type="text/javascript">
-</script>
 </head>
 <body onkeydown="move(event)" onkeyup="moveStop()" onresize="resize()">
 	<div id="touch" onclick="touch()" class="button">Тач</div>
 	<div id="sensor" onclick="sensor()" class="button">Сенсор</div>
 	<div id="calibration" onclick="calibration()" class="button">Калибровка</div>
+	<input type="range" min="1" max="10" step="1" value="5" class="button" id="size" oninput="onChangeInsensitivityArea()"></div>
 	<div id="gameArea"> 
 		<div id="up" onmousedown="moveUp()" onmouseup="moveStop()" ontouchstart="moveUp()" ontouchend="moveStop()"></div>
 		<div id="down" onmousedown="moveDown()" onmouseup="moveStop()" ontouchstart="moveDown()" ontouchend="moveStop()"></div>
