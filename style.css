@@ -120,6 +120,9 @@ body, html {
 		position: absolute;
 		z-index: 4
 	}
+	.button:focus {
+		background-color: #bbb;
+	}
 }
 
 @media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) and (max-device-width: 1024px)  {
