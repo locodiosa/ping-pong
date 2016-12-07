@@ -120,6 +120,10 @@ body, html {
 		position: absolute;
 		z-index: 4
 	}
+
+	.button:hover {
+		background-color: #bbb;
+	}
 	.button:focus {
 		background-color: #bbb;
 	}
