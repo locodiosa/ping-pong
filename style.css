@@ -120,13 +120,6 @@ body, html {
 		position: absolute;
 		z-index: 4
 	}
-
-	.button:hover {
-		background-color: #bbb;
-	}
-	.button:focus {
-		background-color: #bbb;
-	}
 }
 
 @media screen and (orientation: landscape) and (min-aspect-ratio: 17/10) and (max-device-width: 1024px)  {
@@ -177,4 +170,18 @@ body, html {
 		top: 10%;
 		right: 0;	
 	}
+}
+
+#touch:hover {
+	background-color: #bbb;
+}
+#touch:focus {
+	background-color: #bbb;
+}
+
+#sensor:hover {
+	background-color: #bbb;
+}
+#sensor:focus {
+	background-color: #bbb;
 }
