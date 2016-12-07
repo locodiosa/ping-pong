@@ -466,9 +466,11 @@ function onOrientationChange(event) {
 			if (event.beta < userBeta - insensitivityArea && event.beta >= 0) {
 	    		moveUp();
 	    	}
-	    	
-	    	if (event.beta < userBeta - insensitivityArea && event.beta < 0) {
+	    	if (event.beta < userBeta + insensitivityArea && event.beta < -90) {
 	    		moveDown();
+	    	}
+			if (event.beta < userBeta - insensitivityArea && event.beta < 0 && event.beta > -90) {
+	    		moveUp();
 	    	}
 	    }
 
@@ -479,9 +481,11 @@ function onOrientationChange(event) {
 			if (event.beta < userBeta - insensitivityArea && event.beta < 0) {
 	    		moveUp();
 	    	}
-	    	
-	    	if (event.beta > userBeta - insensitivityArea && event.beta > 0) {
+	    	if (event.beta > userBeta - insensitivityArea && event.beta > 90) {
 	    		moveUp();
+	    	}
+	    	if (event.beta > userBeta + insensitivityArea && event.beta > 0 && event.beta < 90) {
+	    		moveDown();
 	    	}
 	    }
 
