@@ -63,7 +63,7 @@ var wallBottom = {
 
 	bounce: function(ball) {
 		if ((ball.y >= heightCoef - this.width - ball.radius) 
-			&& (ball.speedY > 0)) {
+		    && (ball.speedY > 0)) {
 			
 			ball.speedY = -ball.speedY;
 			sounds("wall");
@@ -133,8 +133,8 @@ var ball = {
 	speedY: 0.002,
 
 	draw: function(context) {
-		context.arc(this.x * scale, this.y * scale, this.radius * scale, 
-					0, 2*Math.PI);
+			context.arc(this.x * scale, this.y * scale, this.radius * scale, 
+					    0, 2*Math.PI);
 	},
 
 	bounce: function(ball){}
@@ -150,8 +150,8 @@ var racket1 = {
 
 	draw: function(context) {
 		context.fillRect(this.x * scale, this.y * scale - 
-						this.length * scale / 2, this.width * scale, 
-						this.length * scale);
+						 this.length * scale / 2, this.width * scale, 
+						 this.length * scale);
 	},
 
 	bounce: function(ball) {
@@ -174,9 +174,10 @@ var racket2 = {
 	speed: 0.004,
 
 	draw: function(context) {
-		context.fillRect(this.x * scale - this.width * scale, this.y * scale - 
-						this.length * scale / 2, this.width * scale, 
-						this.length * scale);
+			context.fillRect(this.x * scale - this.width * scale, 
+							 this.y * scale - this.length * scale / 2, 
+							 this.width * scale, 
+							 this.length * scale);
 	},
 
 	bounce: function(ball) {
@@ -201,7 +202,7 @@ var racket2 = {
 };
 
 var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, 
-			ball];
+			   ball];
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -319,11 +320,11 @@ function initAreas() {
 	var upArea = document.getElementById('up');
 	upArea.style.width = (document.documentElement.clientWidth) + 'px';
 	upArea.style.marginLeft = (- (document.documentElement.clientWidth -
-							canvas.width) / 2) + 'px';
+								  canvas.width) / 2) + 'px';
 	var downArea = document.getElementById('down');
 	downArea.style.width = (document.documentElement.clientWidth) + 'px';
 	downArea.style.marginLeft = (- (document.documentElement.clientWidth -
-							canvas.width) / 2) + 'px';
+								    canvas.width) / 2) + 'px';
 }
 
 function drawObjects(context) {
@@ -341,7 +342,7 @@ function bounceRacket(racket) {
 	//
 	var side = (ball.y - racket.y) / (racket.length / 2);
 	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * 
-					ball.speedY) * 1.04;
+							  ball.speedY) * 1.04;
 	var alpha = Math.asin(ball.speedY / ballSpeed);
 	alpha += side * Math.PI / 6;
 	var maxAlpha = Math.PI * 0.4; 
@@ -349,7 +350,7 @@ function bounceRacket(racket) {
 
 	ball.speedY = Math.sin(alpha) * ballSpeed;
 	ball.speedX = Math.sqrt(ballSpeed * ballSpeed - ball.speedY * ball.speedY) * 
-				(ball.speedX >= 0 ? -1 : 1);
+						   (ball.speedX >= 0 ? -1 : 1);
 }
 
 ////////////////////////////Движение ракетки игрока//////////////////////////////
@@ -450,8 +451,8 @@ function onOrientationChange(event) {
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if ((userGamma < 0 && event.gamma < 0) 
-			|| (userGamma > 0 && event.gamma > 0)) {
+		if ((userGamma < 0 && event.gamma < 0) || 
+			(userGamma > 0 && event.gamma > 0)) {
 			
 			if (event.gamma < userGamma - insensitivityArea) { 
 				moveDown();
@@ -459,18 +460,18 @@ function onOrientationChange(event) {
 			if (event.gamma > userGamma + insensitivityArea) { 
 	    		moveUp();
 	    	}
-	    	if (event.gamma < userGamma + insensitivityArea 
-	    		&& event.gamma > userGamma - insensitivityArea) {
+	    	if (event.gamma < userGamma + insensitivityArea && 
+	    		event.gamma > userGamma - insensitivityArea) {
 				moveStop();
 			}
 
-		} else if ((userGamma < 0 && event.gamma > 50) 
-					|| (userGamma > 0 && event.gamma < 0 && event.gamma > -50)) {
-				moveDown();
+		} else if ((userGamma < 0 && event.gamma > 50) || 
+				   (userGamma > 0 && event.gamma < 0 && event.gamma > -50)) {
+			moveDown();
 
-		} else if ((userGamma < 0 && event.gamma > 0 && event.gamma < 50) 
-					|| (userGamma > 0 && event.gamma < 0 && event.gamma < -50)) {
-				moveUp();
+		} else if ((userGamma < 0 && event.gamma > 0 && event.gamma < 50) || 
+				   (userGamma > 0 && event.gamma < 0 && event.gamma < -50)) {
+			moveUp();
 		}	
 
 	} else if (clientWidth < clientHeight) {
@@ -485,9 +486,8 @@ function onOrientationChange(event) {
 	    	if (event.beta < userBeta + insensitivityArea && event.beta < -90) {
 	    		moveDown();
 	    	}
-			if (event.beta < userBeta - insensitivityArea 
-				&& event.beta < 0 
-				&& event.beta > -90) {
+			if (event.beta < userBeta - insensitivityArea && event.beta < 0 && 
+				event.beta > -90) {
 	    		
 	    		moveUp();
 	    	}
@@ -503,16 +503,15 @@ function onOrientationChange(event) {
 	    	if (event.beta > userBeta - insensitivityArea && event.beta > 90) {
 	    		moveUp();
 	    	}
-	    	if (event.beta > userBeta + insensitivityArea 
-	    		&& event.beta > 0 
-	    		&& event.beta < 90) {
+	    	if (event.beta > userBeta + insensitivityArea && event.beta > 0 && 
+	    		event.beta < 90) {
 	    		
 	    		moveDown();
 	    	}
 	    }
 
-    	if (event.beta > userBeta - insensitivityArea 
-    		&& event.beta < userBeta + insensitivityArea) {
+    	if (event.beta > userBeta - insensitivityArea && 
+    		event.beta < userBeta + insensitivityArea) {
 			
 			moveStop();
 		}
