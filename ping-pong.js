@@ -202,6 +202,26 @@ var racket2 = {
 var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, 
 			   ball];
 
+var animFrame = window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame    ||
+				window.oRequestAnimationFrame      ||
+				window.msRequestAnimationFrame     ||
+				null;
+
+if (animFrame !== null) {
+	var recursiveAnim = function() {
+		mainloop();
+		animFrame(recursiveAnim, canvas);
+	};
+
+	// start the mainloop
+	animFrame(recursiveAnim);
+} else {
+	var ONE_FRAME_TIME = 1000.0 / 60.0 ;
+	setInterval(mainloop, ONE_FRAME_TIME);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 function checkGameState() {
@@ -420,30 +440,9 @@ function resize() {
 	};
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-var animFrame = window.requestAnimationFrame ||
-				window.webkitRequestAnimationFrame ||
-				window.mozRequestAnimationFrame    ||
-				window.oRequestAnimationFrame      ||
-				window.msRequestAnimationFrame     ||
-				null;
-
-if (animFrame !== null) {
-	var recursiveAnim = function() {
-		mainloop();
-		animFrame(recursiveAnim, canvas);
-	};
-
-	// start the mainloop
-	animFrame(recursiveAnim);
-} else {
-	var ONE_FRAME_TIME = 1000.0 / 60.0 ;
-	setInterval(mainloop, ONE_FRAME_TIME);
-}
-
 
 ///////////////////////////управление наклоном телефона/////////////////////////
+
 function sensor() {
 	window.addEventListener('deviceorientation', onOrientationChange, true);
 	calibration();
@@ -520,7 +519,7 @@ function onOrientationChange(event) {
 	    	if (event.beta > userBeta - insensitivityArea && event.beta > 90) {
 	    		moveUp();
 	    	}
-	    	
+
 	    	if (event.beta > userBeta + insensitivityArea && event.beta > 0 && 
 	    		event.beta < 90) {
 	    		
