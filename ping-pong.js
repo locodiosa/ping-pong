@@ -62,11 +62,10 @@ var wallBottom = {
 	},
 
 	bounce: function(ball) {
-		if ((ball.y >= heightCoef - this.width - ball.radius) 
-		    && (ball.speedY > 0)) {
-			
-			ball.speedY = -ball.speedY;
-			sounds("wall");
+		if ((ball.y >= heightCoef - this.width - ball.radius) && 
+			(ball.speedY > 0)) {
+				ball.speedY = -ball.speedY;
+				sounds("wall");
 		}
 	}
 };
@@ -135,7 +134,7 @@ var ball = {
 	draw: function(context) {
 			context.arc(this.x * scale, this.y * scale, this.radius * scale, 
 					    0, 2*Math.PI);
-	},
+		  },
 
 	bounce: function(ball){}
 };
@@ -149,20 +148,20 @@ var racket1 = {
 	speed: 0,
 
 	draw: function(context) {
-		context.fillRect(this.x * scale, this.y * scale - 
-						 this.length * scale / 2, this.width * scale, 
-						 this.length * scale);
-	},
+			context.fillRect(this.x * scale, this.y * scale - 
+							 this.length * scale / 2, this.width * scale, 
+							 this.length * scale);
+		  },
 
 	bounce: function(ball) {
-		if ((ball.x <= this.x + this.width + ball.radius) && 
-			(ball.y >= this.y - this.length / 2 - ball.radius) && 
-			(ball.y <= this.y + this.length / 2 + ball.radius) &&
-			(ball.speedX < 0)) {
-				bounceRacket(this);
-				sounds("racket1");
-		}
-	}
+				if ((ball.x <= this.x + this.width + ball.radius) && 
+					(ball.y >= this.y - this.length / 2 - ball.radius) && 
+					(ball.y <= this.y + this.length / 2 + ball.radius) &&
+					(ball.speedX < 0)) {
+						bounceRacket(this);
+						sounds("racket1");
+				}
+			}
 };
 
 //ракетка компьютера
@@ -176,9 +175,8 @@ var racket2 = {
 	draw: function(context) {
 			context.fillRect(this.x * scale - this.width * scale, 
 							 this.y * scale - this.length * scale / 2, 
-							 this.width * scale, 
-							 this.length * scale);
-	},
+							 this.width * scale, this.length * scale);
+		  },
 
 	bounce: function(ball) {
 		if ((ball.x >= this.x - this.width - ball.radius) && 
@@ -212,6 +210,7 @@ function checkGameState() {
 		draw();
 	} else if (gameState == 1) {
 		var pauseTime = Date.now() / 1000;
+
 		if (ball.x > 0.5) {
 			moveRacket1();
 			draw();
@@ -274,13 +273,17 @@ function moveBall() {
 function moveRacket2() {
 //движение ракетки компьютера
 	if (ball.speedX > 0) {
+
 		if (ball.y > racket2.y + racket2.length / 4) {
 			racket2.y += racket2.speed * dt;
+
 			if (racket2.y >= boardHeight - racket2.length / 2 - wallBottom.width) {
 				racket2.y = boardHeight - racket2.length / 2 - wallBottom.width;
 			}	
+
 		} else if (ball.y < racket2.y - racket2.length / 4) {
 			racket2.y -= racket2.speed * dt;
+
 			if (racket2.y <= racket2.length / 2 + wallUpper.width) {
 				racket2.y = racket2.length/2 + wallUpper.width;
 			} 
@@ -317,10 +320,12 @@ function initAreas() {
 	gameArea.style.height = (canvas.height) + 'px' ;
 	gameArea.style.marginTop = (-canvas.height / 2) + 'px';
 	gameArea.style.marginLeft = (-canvas.width / 2) + 'px';
+
 	var upArea = document.getElementById('up');
 	upArea.style.width = (document.documentElement.clientWidth) + 'px';
 	upArea.style.marginLeft = (- (document.documentElement.clientWidth -
 								  canvas.width) / 2) + 'px';
+
 	var downArea = document.getElementById('down');
 	downArea.style.width = (document.documentElement.clientWidth) + 'px';
 	downArea.style.marginLeft = (- (document.documentElement.clientWidth -
@@ -344,8 +349,11 @@ function bounceRacket(racket) {
 	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * 
 							  ball.speedY) * 1.04;
 	var alpha = Math.asin(ball.speedY / ballSpeed);
+
 	alpha += side * Math.PI / 6;
+
 	var maxAlpha = Math.PI * 0.4; 
+
 	alpha = Math.min(Math.max(alpha, -maxAlpha), maxAlpha);
 
 	ball.speedY = Math.sin(alpha) * ballSpeed;
@@ -387,6 +395,7 @@ function countScore(idName, gamer) {
 	ball.speedX = - ball.speedX;
 	ball.speedY = - ball.speedY;
 	document.getElementById(idName).innerHTML = "" + gamer + "";
+
 	if (gamer == 10) {
 		document.getElementById(idName).innerHTML = "" + gamer + "";
 		document.getElementById("gameOver").innerHTML = "ИГРА ОКОНЧЕНА";
@@ -457,9 +466,11 @@ function onOrientationChange(event) {
 			if (event.gamma < userGamma - insensitivityArea) { 
 				moveDown();
 			}
+
 			if (event.gamma > userGamma + insensitivityArea) { 
 	    		moveUp();
 	    	}
+
 	    	if (event.gamma < userGamma + insensitivityArea && 
 	    		event.gamma > userGamma - insensitivityArea) {
 				moveStop();
@@ -477,15 +488,19 @@ function onOrientationChange(event) {
 	} else if (clientWidth < clientHeight) {
 		//портретная ориентация экрана
 		if (userBeta >= 0) {
+
 			if (event.beta > userBeta + insensitivityArea && event.beta >= 0) {
 				moveDown();
 			}
+
 			if (event.beta < userBeta - insensitivityArea && event.beta >= 0) {
 	    		moveUp();
 	    	}
+
 	    	if (event.beta < userBeta + insensitivityArea && event.beta < -90) {
 	    		moveDown();
 	    	}
+
 			if (event.beta < userBeta - insensitivityArea && event.beta < 0 && 
 				event.beta > -90) {
 	    		
@@ -497,12 +512,15 @@ function onOrientationChange(event) {
 			if (event.beta > userBeta + insensitivityArea && event.beta < 0) {
 				moveDown();
 			}
+
 			if (event.beta < userBeta - insensitivityArea && event.beta < 0) {
 	    		moveUp();
 	    	}
+
 	    	if (event.beta > userBeta - insensitivityArea && event.beta > 90) {
 	    		moveUp();
 	    	}
+	    	
 	    	if (event.beta > userBeta + insensitivityArea && event.beta > 0 && 
 	    		event.beta < 90) {
 	    		
