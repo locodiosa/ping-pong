@@ -18,7 +18,7 @@ var mainloop = function() {
 	countFrames();
 }
 
-//////////////////////////////////Пропорции игрового поля////////////////////////////
+//////////////////////////////////Пропорции игрового поля///////////////////////
 
 var clientWidth = document.documentElement.clientWidth;
 var clientHeight = document.documentElement.clientHeight;
@@ -34,7 +34,7 @@ var heightCoef = 0.7
 var boardWidth = 1;
 var boardHeight = heightCoef;
 
-/////////////////////////////////////////Объекты///////////////////////////////////////
+/////////////////////////////////////////Объекты///////////////////////////////
 
 var wallUpper = {
 	length: 1,
@@ -57,11 +57,14 @@ var wallBottom = {
 	width: 0.014,
 
 	draw: function(context) {
-		context.fillRect(0, heightCoef * scale - this.width * scale, this.length * scale, this.width * scale);
+		context.fillRect(0, heightCoef * scale - this.width * scale, 
+						this.length * scale, this.width * scale);
 	},
 
 	bounce: function(ball) {
-		if ((ball.y >= heightCoef - this.width - ball.radius) && (ball.speedY > 0)) {
+		if ((ball.y >= heightCoef - this.width - ball.radius) 
+			&& (ball.speedY > 0)) {
+			
 			ball.speedY = -ball.speedY;
 			sounds("wall");
 		}
@@ -130,7 +133,8 @@ var ball = {
 	speedY: 0.002,
 
 	draw: function(context) {
-		context.arc(this.x * scale, this.y * scale, this.radius * scale, 0, 2*Math.PI);
+		context.arc(this.x * scale, this.y * scale, this.radius * scale, 
+					0, 2*Math.PI);
 	},
 
 	bounce: function(ball){}
@@ -145,7 +149,9 @@ var racket1 = {
 	speed: 0,
 
 	draw: function(context) {
-		context.fillRect(this.x * scale, this.y * scale - this.length * scale / 2, this.width * scale, this.length * scale);
+		context.fillRect(this.x * scale, this.y * scale - 
+						this.length * scale / 2, this.width * scale, 
+						this.length * scale);
 	},
 
 	bounce: function(ball) {
@@ -168,7 +174,9 @@ var racket2 = {
 	speed: 0.004,
 
 	draw: function(context) {
-		context.fillRect(this.x * scale - this.width * scale, this.y * scale - this.length * scale / 2, this.width * scale, this.length * scale);
+		context.fillRect(this.x * scale - this.width * scale, this.y * scale - 
+						this.length * scale / 2, this.width * scale, 
+						this.length * scale);
 	},
 
 	bounce: function(ball) {
@@ -192,9 +200,10 @@ var racket2 = {
 	}
 };
 
-var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, ball];
+var objects = [wallUpper, wallBottom, wallLeft, wallRight, racket1, racket2, 
+			ball];
 
-////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 function checkGameState() {
 	if (gameState == 0) {
@@ -232,7 +241,7 @@ function countFrames() {
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 function calc() {
 	moveBall();	
@@ -247,7 +256,7 @@ function draw() {
 	drawObjects(context);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 function moveBall() {
 //движение мяча
@@ -292,7 +301,7 @@ function moveRacket1() {
 	} 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 function initCanvas() {
 	canvas = document.getElementById("canvas");
@@ -309,10 +318,12 @@ function initAreas() {
 	gameArea.style.marginLeft = (-canvas.width / 2) + 'px';
 	var upArea = document.getElementById('up');
 	upArea.style.width = (document.documentElement.clientWidth) + 'px';
-	upArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
+	upArea.style.marginLeft = (- (document.documentElement.clientWidth -
+							canvas.width) / 2) + 'px';
 	var downArea = document.getElementById('down');
 	downArea.style.width = (document.documentElement.clientWidth) + 'px';
-	downArea.style.marginLeft = (- (document.documentElement.clientWidth-canvas.width) / 2) + 'px';
+	downArea.style.marginLeft = (- (document.documentElement.clientWidth -
+							canvas.width) / 2) + 'px';
 }
 
 function drawObjects(context) {
@@ -325,11 +336,12 @@ function drawObjects(context) {
 	context.fill();	
 }
 
-/////////////////////////////Расчет угла отскока мяча от ракетки////////////////////////////
+////////////////////////Расчет угла отскока мяча от ракетки////////////////////
 function bounceRacket(racket) {
 	//
 	var side = (ball.y - racket.y) / (racket.length / 2);
-	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY) * 1.04;
+	var ballSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * 
+					ball.speedY) * 1.04;
 	var alpha = Math.asin(ball.speedY / ballSpeed);
 	alpha += side * Math.PI / 6;
 	var maxAlpha = Math.PI * 0.4; 
@@ -340,7 +352,7 @@ function bounceRacket(racket) {
 				(ball.speedX >= 0 ? -1 : 1);
 }
 
-/////////////////////////////Движение ракетки игрока////////////////////////////////////////
+////////////////////////////Движение ракетки игрока//////////////////////////////
 
 function move(event) {
 	//перемещение ракетки игрока стрелками
@@ -365,7 +377,7 @@ function moveDown() {
 	//движение ракетки игрока вниз
 	racket1.speed = boardWidth * 0.004;
 }
-////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 
 function countScore(idName, gamer) {
@@ -398,7 +410,7 @@ function resize() {
 	};
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 var animFrame = window.requestAnimationFrame ||
 				window.webkitRequestAnimationFrame ||
@@ -421,7 +433,7 @@ if (animFrame !== null) {
 }
 
 
-//////////////////////////////управление наклоном телефона//////////////////////////////////
+///////////////////////////управление наклоном телефона/////////////////////////
 function sensor() {
 	window.addEventListener('deviceorientation', onOrientationChange, true);
 	calibration();
@@ -438,7 +450,8 @@ function onOrientationChange(event) {
 
 	if (clientWidth > clientHeight) {
 		//альбомная ориентация экрана
-		if ((userGamma < 0 && event.gamma < 0) || (userGamma > 0 && event.gamma > 0)) {
+		if ((userGamma < 0 && event.gamma < 0) 
+			|| (userGamma > 0 && event.gamma > 0)) {
 			
 			if (event.gamma < userGamma - insensitivityArea) { 
 				moveDown();
@@ -446,14 +459,17 @@ function onOrientationChange(event) {
 			if (event.gamma > userGamma + insensitivityArea) { 
 	    		moveUp();
 	    	}
-	    	if (event.gamma < userGamma + insensitivityArea && event.gamma > userGamma - insensitivityArea) {
+	    	if (event.gamma < userGamma + insensitivityArea 
+	    		&& event.gamma > userGamma - insensitivityArea) {
 				moveStop();
 			}
 
-		} else if ((userGamma < 0 && event.gamma > 50) || (userGamma > 0 && event.gamma < 0 && event.gamma > -50)) {
+		} else if ((userGamma < 0 && event.gamma > 50) 
+					|| (userGamma > 0 && event.gamma < 0 && event.gamma > -50)) {
 				moveDown();
 
-		} else if ((userGamma < 0 && event.gamma > 0 && event.gamma < 50) || (userGamma > 0 && event.gamma < 0 && event.gamma < -50)) {
+		} else if ((userGamma < 0 && event.gamma > 0 && event.gamma < 50) 
+					|| (userGamma > 0 && event.gamma < 0 && event.gamma < -50)) {
 				moveUp();
 		}	
 
@@ -469,7 +485,10 @@ function onOrientationChange(event) {
 	    	if (event.beta < userBeta + insensitivityArea && event.beta < -90) {
 	    		moveDown();
 	    	}
-			if (event.beta < userBeta - insensitivityArea && event.beta < 0 && event.beta > -90) {
+			if (event.beta < userBeta - insensitivityArea 
+				&& event.beta < 0 
+				&& event.beta > -90) {
+	    		
 	    		moveUp();
 	    	}
 	    }
@@ -484,12 +503,17 @@ function onOrientationChange(event) {
 	    	if (event.beta > userBeta - insensitivityArea && event.beta > 90) {
 	    		moveUp();
 	    	}
-	    	if (event.beta > userBeta + insensitivityArea && event.beta > 0 && event.beta < 90) {
+	    	if (event.beta > userBeta + insensitivityArea 
+	    		&& event.beta > 0 
+	    		&& event.beta < 90) {
+	    		
 	    		moveDown();
 	    	}
 	    }
 
-    	if (event.beta > userBeta - insensitivityArea && event.beta < userBeta + insensitivityArea) {
+    	if (event.beta > userBeta - insensitivityArea 
+    		&& event.beta < userBeta + insensitivityArea) {
+			
 			moveStop();
 		}
 	}
@@ -510,7 +534,7 @@ function userCalibration(event) {
 }
 
 
-///////////////////////////////////////Звуки////////////////////////////////////////////
+///////////////////////////////////////Звуки////////////////////////////////////
 
 function sounds(soundName){
   var audio = new Audio();
@@ -519,7 +543,7 @@ function sounds(soundName){
   audio.play();
 }
 
-///////////////////////////////запрет прокрутки страницы////////////////////////////////////
+////////////////////////////запрет прокрутки страницы////////////////////////////
 
 document.onmousewheel = document.onwheel = function() { 
 	return false;
@@ -532,7 +556,7 @@ document.onkeydown = function(e) {
 }
 
 
-///////////////////////////Запрет выключения экрана телефона/////////////////////////////
+///////////////////////Запрет выключения экрана телефона////////////////////////
 
 navigator.wakeLock.request("screen"); 
 
