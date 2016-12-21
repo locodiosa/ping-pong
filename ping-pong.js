@@ -16,7 +16,7 @@ var userBeta = 0;
 var mainloop = function() {
 	checkGameState();	
 	countFrames();
-}
+};
 
 //////////////////////////////////Пропорции игрового поля///////////////////////
 
@@ -27,9 +27,9 @@ var scale = clientWidth * 0.95;
 
 if (clientWidth >= clientHeight * 1.3) {
 	scale = clientHeight * 1.3;
-};
+}
 
-var heightCoef = 0.7
+var heightCoef = 0.7;
 	
 var boardWidth = 1;
 var boardHeight = heightCoef;
@@ -89,7 +89,7 @@ var wallLeft = {
 			} else {
 				ball.speedX = 0.005;
 				ball.speedY = 0.002;
-			};
+			}
 			
 			scoreComputer += 1;
 			sounds("out");
@@ -116,7 +116,7 @@ var wallRight = {
 			} else {
 				ball.speedX = - 0.005;
 				ball.speedY = 0.002;
-			};
+			}
 
 			scorePlayer += 1;
 			sounds("out");
@@ -225,7 +225,7 @@ if (animFrame !== null) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function checkGameState() {
-	if (gameState == 0) {
+	if (gameState === 0) {
 		calc();
 		draw();
 	} else if (gameState == 1) {
@@ -437,7 +437,7 @@ function resize() {
 	if (clientWidth >= clientHeight * 1.3) {
 		clientHeight = clientHeight;
 		scale = clientHeight * 1.3;
-	};
+	}
 }
 
 
@@ -569,7 +569,7 @@ document.onkeydown = function(e) {
 	if ((e.keyCode >= 33) && (e.keyCode <=40)) {
 		return false;
 	} 
-}
+};
 
 
 ///////////////////////Запрет выключения экрана телефона////////////////////////
